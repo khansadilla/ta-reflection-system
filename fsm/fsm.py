@@ -2,7 +2,15 @@ from fsm.states import NEXT
 from prompts.chains import get_chain
 from utils.sanitize import sanitize
 
-def gate(state, text):
+def gate(stage, text):
+    cleaned = text.strip().lower()
+
+    if(stage=="reasoning"):
+        reasoning_markers=["karena aku","aku jadi"]
+
+        if not any(m in cleaned for m in reasoning_markers):
+            return "stay"
+
     return "advance" if len(text.strip())>20 else "stay"
 
 def fsm_step(stage, user_text, llm):

@@ -12,7 +12,7 @@ while True:
 
     stage, question = fsm_step(stage, user_text, llm)
 
-    if stage=="reconstructing":
+    if stage=="reconstructing" :
         print("\n STAGE:",stage)
         print("Q:",question)
 
