@@ -5,3 +5,9 @@ llm = ChatGroq(
     temperature=0.3,
     request_timeout=20
 )
+
+llm_judge = ChatGroq(
+    model="llama-3.1-8b-instant",
+    temperature=0,
+    request_timeout=20
+)

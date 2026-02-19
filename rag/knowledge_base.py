@@ -60,3 +60,52 @@ knowledge_base = {
     }
 
 }
+
+transition_indicators = {
+
+    "reporting_responding": {
+        "advance_if": [
+            "Respons menyebutkan konteks spesifik (siapa, apa, atau di mana)",
+            "Respons mengandung reaksi personal berupa emosi atau pikiran"
+        ],
+        "stay_if": [
+            "Deskripsi terlalu umum",
+            "Tidak ada reaksi personal"
+        ]
+    },
+
+    "relating": {
+        "advance_if": [
+            "Respons menghubungkan pengalaman ini dengan pengalaman masa lalu",
+            "Respons mengaitkan dengan nilai, kebiasaan, atau pola pribadi"
+        ],
+        "stay_if": [
+            "Hanya mengulang emosi tanpa membuat koneksi",
+            "Tidak ada hubungan dengan pengalaman lain"
+        ]
+    },
+
+    "reasoning": {
+        "advance_if": [
+            "Respons mengidentifikasi faktor penyebab yang signifikan",
+            "Respons menggunakan sudut pandang atau prinsip untuk menjelaskan mengapa hal itu terjadi"
+        ],
+        "stay_if": [
+            "Hanya mendeskripsikan ulang kejadian",
+            "Hanya menyalahkan faktor luar tanpa analisis"
+        ]
+    },
+
+    "reconstructing": {
+        "advance_if": [
+            "Respons menyusun rencana tindakan yang konkret",
+            "Respons memberikan alasan logis mengapa rencana tersebut relevan berdasarkan analisis sebelumnya"
+        ],
+        "stay_if": [
+            "Rencana terlalu abstrak atau umum",
+            "Tidak ada hubungan dengan analisis sebelumnya"
+        ]
+    }
+
+}
+
