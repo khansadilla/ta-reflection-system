@@ -1,11 +1,11 @@
 from langchain_core.prompts import ChatPromptTemplate
 
 from prompts.instructions import core_instruction, stage_instruction
-from rag.retriever import get_knowledge
+from rag.retriever import retrieve
 
-def get_chain(stage, llm):
+def get_chain(stage, llm, stage_buffer):
 
-    knowledge = get_knowledge(stage)
+    knowledge = retrieve(stage, stage_buffer, k=2)
     instruction = core_instruction() + stage_instruction(stage)
 
     prompt = ChatPromptTemplate.from_messages([

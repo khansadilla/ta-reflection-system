@@ -48,7 +48,7 @@ def fsm_step(stage, user_text, llm, stage_buffer):
     if decision=="advance":
         stage_buffer=""
 
-    chain = get_chain(new_stage, llm)
+    chain = get_chain(new_stage, llm, stage_buffer)
     question = sanitize(chain.invoke({"text": user_text}).content)
 
     return new_stage, question, stage_buffer

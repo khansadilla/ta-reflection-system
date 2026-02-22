@@ -22,8 +22,10 @@ def stage_instruction(stage):
 
     if stage == "relating":
         return (
-            "Fokuskan pertanyaan pada keterlibatan diri pengguna dalam pengalaman tersebut.\n"
-            "Jangan langsung masuk ke evaluasi atau solusi.\n"
+            "Fokuskan pertanyaan pada pola pribadi, nilai, kebiasaan, atau pengalaman masa lalu pengguna.\n"
+            "Dorong pengguna menghubungkan situasi ini dengan pengalaman lain yang pernah terjadi.\n"
+            "Hindari pertanyaan yang hanya mengulang emosi saat ini.\n"
+            "Jangan bertanya lagi tentang 'apa yang kamu rasakan sekarang'.\n"
         )
 
     if stage == "reasoning":

@@ -1,6 +1,15 @@
 from llm.model import llm_judge
-from rag.retriever import format_indicators
+from rag.knowledge_base import transition_indicators
 from langchain_core.prompts import ChatPromptTemplate
+
+def format_indicators(stage):
+    indicators = transition_indicators.get(stage,{})
+
+    advance = "\n".join([f"-{i}" for i in indicators.get("advance_if",[])])
+    stay = "\n".join([f"-{i}" for i in indicators.get("stay_if",[])])
+
+    return f""" KRITERIA ADVANCE: {advance} \n KRITERIA STAY: {stay}"""
+    
 
 def get_judge_chain(stage, llm_judge):
 
