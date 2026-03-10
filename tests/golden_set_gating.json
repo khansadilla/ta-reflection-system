@@ -1,0 +1,331 @@
+[
+{
+"case_id":1,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku menunda ngerjain tugas sampai malam","expected":"stay"},
+{"text":"Kalau dipikir-pikir aku sering menunda kalau tugasnya terasa besar","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":2,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Tadi aku nggak ngomong apa-apa di rapat","expected":"stay"},
+{"text":"Aku memang sering diam kalau diskusinya ramai","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":3,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku telat menyelesaikan bagianku di proyek","expected":"stay"},
+{"text":"Kayaknya aku memang sering kesulitan mulai kerja kalau deadline masih jauh","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":4,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku habis debat kecil sama teman","expected":"stay"},
+{"text":"Kalau ada konflik aku biasanya langsung defensif","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":5,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku merasa gugup saat diminta presentasi","expected":"stay"},
+{"text":"Setiap kali presentasi aku biasanya langsung merasa tidak cukup siap","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":6,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku merasa bersalah setelah menonton film lama","expected":"stay"},
+{"text":"Setiap kali aku mencoba istirahat biasanya aku merasa seperti ini","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":7,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku kecewa setelah melihat hasil kerjaku","expected":"stay"},
+{"text":"Aku memang sering meragukan hasil kerjaku sendiri","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":8,
+"stage":"reporting_responding",
+"turns":[
+{"text":"Aku merasa aneh ketika punya banyak waktu kosong","expected":"stay"},
+{"text":"Kayaknya aku terbiasa merasa berguna hanya kalau sedang sibuk","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":9,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering menunda pekerjaan sampai deadline dekat","expected":"stay"},
+{"text":"Mungkin karena aku bingung harus mulai dari mana","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":10,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering diam di rapat","expected":"stay"},
+{"text":"Mungkin karena aku takut ideku dianggap kurang bagus","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":11,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering merasa minder kalau ketemu orang yang lebih berpengalaman","expected":"stay"},
+{"text":"Mungkin karena aku terlalu cepat membandingkan diriku dengan mereka","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":12,
+"stage":"relating",
+"turns":[
+{"text":"Aku selalu merasa gelisah kalau tidak produktif","expected":"stay"},
+{"text":"Mungkin karena aku mengaitkan nilai diriku dengan seberapa banyak yang aku kerjakan","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":13,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering terlalu keras sama diriku","expected":"stay"},
+{"text":"Mungkin karena aku percaya kalau aku tidak keras aku akan jadi malas","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":14,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering overthinking setelah diskusi","expected":"stay"},
+{"text":"Mungkin karena aku takut orang lain menilai aku tidak kompeten","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":15,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering mengambil terlalu banyak tanggung jawab","expected":"stay"},
+{"text":"Mungkin karena aku sulit menolak permintaan orang lain","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":16,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering merasa bersalah saat istirahat","expected":"stay"},
+{"text":"Mungkin karena aku menganggap istirahat sama dengan malas","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":17,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering menunda pekerjaan karena tugasnya terasa terlalu besar","expected":"stay"},
+{"text":"Aku mulai sadar mungkin aku perlu memecah tugas itu menjadi bagian kecil","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":18,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku takut berbicara di rapat karena khawatir idenya salah","expected":"stay"},
+{"text":"Aku mulai sadar kalau terus diam malah membuatku tidak berkembang","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":19,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering menyalahkan diriku supaya tidak mengulangi kesalahan","expected":"stay"},
+{"text":"Aku mulai sadar terlalu menyalahkan diri malah membuatku sulit bergerak maju","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":20,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering membandingkan diriku dengan orang lain","expected":"stay"},
+{"text":"Aku mulai sadar kebiasaan itu membuatku sulit menghargai progresku sendiri","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":21,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering mengambil terlalu banyak tugas","expected":"stay"},
+{"text":"Aku mulai sadar itu membuatku kewalahan dan pekerjaanku jadi tidak maksimal","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":22,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku merasa harus selalu melakukan semuanya dengan sempurna","expected":"stay"},
+{"text":"Aku mulai sadar standar itu mungkin terlalu tinggi untuk diriku","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":23,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering takut membuat kesalahan","expected":"stay"},
+{"text":"Aku mulai sadar ketakutan itu justru membuatku sulit mencoba hal baru","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":24,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku selalu merasa harus membuktikan diriku lewat kerja keras","expected":"stay"},
+{"text":"Aku mulai sadar mungkin aku terlalu mencari validasi lewat itu","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+},
+
+{
+"case_id":25,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering menunda pekerjaan","expected":"stay"},
+{"text":"Mungkin karena aku malas","expected":"stay"}
+],
+"primary_label":"stay",
+"acceptable_label":"advance"
+},
+
+{
+"case_id":26,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering diam di rapat","expected":"stay"},
+{"text":"Kayaknya aku memang bukan tipe orang yang suka bicara","expected":"stay"}
+],
+"primary_label":"stay",
+"acceptable_label":"advance"
+},
+
+{
+"case_id":27,
+"stage":"relating",
+"turns":[
+{"text":"Aku sering merasa kurang percaya diri","expected":"stay"},
+{"text":"Karena aku memang orangnya seperti itu","expected":"stay"}
+],
+"primary_label":"stay",
+"acceptable_label":null
+},
+
+{
+"case_id":28,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku takut berbicara di depan banyak orang","expected":"stay"},
+{"text":"Jadi mungkin aku harus lebih percaya diri","expected":"stay"}
+],
+"primary_label":"stay",
+"acceptable_label":"advance"
+},
+
+{
+"case_id":29,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering membandingkan diriku dengan orang lain","expected":"stay"},
+{"text":"Karena mereka terlihat lebih berhasil","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":"stay"
+},
+
+{
+"case_id":30,
+"stage":"reasoning",
+"turns":[
+{"text":"Aku sering merasa tidak cukup baik","expected":"stay"},
+{"text":"Mungkin aku terlalu keras pada diriku","expected":"advance"}
+],
+"primary_label":"advance",
+"acceptable_label":null
+}
+]

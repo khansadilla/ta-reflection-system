@@ -65,47 +65,44 @@ transition_indicators = {
 
     "reporting_responding": {
         "advance_if": [
-            "Respons menyebutkan konteks spesifik (siapa, apa, atau di mana)",
-            "Respons mengandung reaksi personal berupa emosi atau pikiran"
+            "Respons menunjukkan pola diri atau generalisasi diri",
+            "Respons menyatakan bahwa situasi tersebut sering terjadi atau berulang"
         ],
         "stay_if": [
-            "Deskripsi terlalu umum",
-            "Tidak ada reaksi personal"
+            "Respons hanya mendeskripsikan kejadian atau emosi",
+            "Tidak ada indikasi pola atau kebiasaan diri"
         ]
     },
 
     "relating": {
         "advance_if": [
-            "Respons menghubungkan pengalaman ini dengan pengalaman masa lalu",
-            "Respons mengaitkan dengan nilai, kebiasaan, atau pola pribadi"
+            "Respons mengajukan hipotesis tentang penyebab pola tersebut",
+            "Respons mencoba menjelaskan mengapa pola itu terjadi"
         ],
         "stay_if": [
-            "Hanya mengulang emosi tanpa membuat koneksi",
-            "Tidak ada hubungan dengan pengalaman lain"
+            "Respons hanya menyebut pola tanpa menjelaskan sebab",
+            "Tidak ada upaya menjelaskan mengapa pola itu terjadi"
         ]
     },
 
     "reasoning": {
         "advance_if": [
-            "Respons mengidentifikasi faktor penyebab yang signifikan",
-            "Respons menggunakan sudut pandang atau prinsip untuk menjelaskan mengapa hal itu terjadi"
+            "Respons menunjukkan insight atau pemahaman baru tentang diri",
+            "Respons menunjukkan perubahan cara pandang terhadap situasi"
         ],
         "stay_if": [
-            "Hanya mendeskripsikan ulang kejadian",
-            "Hanya menyalahkan faktor luar tanpa analisis"
+            "Respons hanya memberikan hipotesis sebab tanpa insight baru",
+            "Tidak ada perubahan pemahaman tentang diri"
         ]
     },
 
     "reconstructing": {
         "advance_if": [
-            "Respons menyusun rencana tindakan yang konkret",
-            "Respons memberikan alasan logis mengapa rencana tersebut relevan berdasarkan analisis sebelumnya"
+            "Respons menyusun rencana tindakan atau langkah konkret ke depan"
         ],
         "stay_if": [
-            "Rencana terlalu abstrak atau umum",
-            "Tidak ada hubungan dengan analisis sebelumnya"
+            "Respons hanya menyebut insight tanpa rencana tindakan"
         ]
     }
-
 }
 

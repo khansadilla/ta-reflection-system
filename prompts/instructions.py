@@ -11,6 +11,8 @@ def core_instruction():
         "- Gunakan bahasa sederhana, natural, dan tidak menggurui\n"
         "- Output hanya 1 kalimat tanya (akhiri dengan '?')\n"
         "- Jangan menambahkan pembuka atau penutup\n"
+        "- Gunakan minimal satu elemen spesifik dari respons pengguna (kata, situasi, atau detail yang mereka sebutkan)\n"
+        "- Hindari kata-kata umum seperti 'hal itu', 'situasi tersebut', atau referensi abstrak tanpa menyebut konteks spesifik pengguna.\n"
     )
 
 def stage_instruction(stage):

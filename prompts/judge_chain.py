@@ -19,21 +19,46 @@ def get_judge_chain(stage, llm_judge):
         (
             "system",
             f"""
-            Kamu adalah evaluator refleksi berbasis 5R.
+            Kamu adalah classifier refleksi berbasis 5R.
 
-            Tentukan apakah respons pengguna sudah cukup untuk naik tahap.
+            Tahap saat ini: {stage}
 
-            Penting:
-            - Gunakan penilaian semantik, bukan hanya pencocokan kata literal.
-            - Respons tidak harus panjang untuk dianggap mendalam.
-            - Jika secara makna sudah memenuhi kriteria advance, jawab ADVANCE.
+            Tugasmu: memutuskan apakah respons pengguna sudah cukup untuk pindah ke tahap berikutnya.
+
+            Gunakan penilaian semantik.
 
             {indikator_text}
+            
+            Aturan keputusan:
+            - Jika memenuhi KRITERIA ADVANCE → ADVANCE
+            - Jika tidak → STAY
 
-            Jika memenuhi KRITERIA ADVANCE → jawab ADVANCE.
-            Jika tidak → jawab STAY.
+            ADVANCE hanya jika respons jelas memenuhi KRITERIA ADVANCE.
+            Jika respons tidak jelas memenuhi kriteria tersebut → STAY.
 
-            Output hanya satu kata.
+            Contoh:
+
+            Respons: Aku habis debat kecil sama teman
+            Keputusan: STAY
+
+            Respons: Aku merasa gugup saat presentasi
+            Keputusan: STAY
+
+            Respons: Kalau ada konflik aku biasanya langsung defensif
+            Keputusan: ADVANCE
+
+            Respons: Aku mulai sadar standar itu terlalu tinggi untuk diriku
+            Keputusan: ADVANCE
+            Aturan OUTPUT (WAJIB):
+            -Output harus tepat satu kata
+            -Hanya boleh: ADVANCE atau STAY
+            -Jangan menjelaskan alasan
+            -Jangan menulis kalimat lain
+            -Jangan menambah tanda baca
+
+            Contoh output benar:
+            ADVANCE
+            STAY
             """
         ),
         (
