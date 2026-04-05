@@ -28,11 +28,23 @@ st.caption("Framework 5R (Bain et al., 2002) - TA Khansa Adilla")
 # 2. Inisialisasi Session State
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Kalau kamu memilih satu hal yang paling ingin kamu refleksikan hari ini, apa itu?"}]
+
+if "stage" not in st.session_state:
     st.session_state.stage = "reporting_responding"
+
+if "stage_buffer" not in st.session_state:
     st.session_state.stage_buffer = ""
+
+if "full_history" not in st.session_state:
     st.session_state.full_history = ""
+
+if "is_completed" not in st.session_state:
     st.session_state.is_completed = False
 
+if "last_question" not in st.session_state:
+    # Isi dengan pertanyaan pertama biar Judge punya konteks awal
+    st.session_state.last_question = "Kalau kamu memilih satu hal yang paling ingin kamu refleksikan hari ini, apa itu?"
+    
 # 3. Tampilin Chat History
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
