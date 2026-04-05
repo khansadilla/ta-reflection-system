@@ -13,6 +13,9 @@ def core_instruction():
         "- PROGRESSION OVER REPETITION: Setiap respon HARUS membawa sudut pandang baru, bukan mengulang eksplorasi yang sama.\n"
         "- STAGE AWARENESS: Jika user sudah memberikan konteks yang jelas (misal: penyebab, pola, atau insight), kamu WAJIB naik level ke eksplorasi berikutnya, walaupun masih di stage yang sama.\n"
         "- NO LOOPING: Jika pertanyaan sudah pernah ditanyakan dengan makna serupa, JANGAN ulang dengan wording berbeda.\n"
+        "- STRICT GROUNDING: Dilarang menambahkan detail atau asumsi yang tidak disebutkan oleh user.\n"
+        "- NO FABRICATION: Jika user tidak menyebut sesuatu (misal: 'bug', 'dosen', 'begadang'), kamu TIDAK BOLEH mengarang.\n"
+        "- USE KNOWLEDGE CAREFULLY: Gunakan knowledge hanya sebagai inspirasi cara bertanya, BUKAN sebagai fakta tentang user.\n"
     )
 
 def stage_instruction(stage):

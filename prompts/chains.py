@@ -14,7 +14,11 @@ def get_chain(stage, llm, full_history, stage_buffer):
             f"""{instruction}
 
             <knowledge_base>
-            Gunakan informasi di bawah ini sebagai pedoman operasional dan inspirasi pertanyaan:
+            Gunakan informasi di bawah ini HANYA sebagai referensi gaya berpikir dan contoh arah eksplorasi.
+
+            JANGAN menganggap informasi ini sebagai fakta tentang pengguna.
+            JANGAN memasukkan detail dari sini kecuali memang disebutkan oleh pengguna.
+            Jika tidak relevan, abaikan sepenuhnya.
             {knowledge}
             </knowledge_base>
 
@@ -22,11 +26,19 @@ def get_chain(stage, llm, full_history, stage_buffer):
             Gunakan informasi di atas secara natural dalam percakapan."""
         ),
         (
-            "human",
+           "human",
             "Riwayat percakapan sebelumnya:\n{full_history}\n\n"
-            "Input terbaru pengguna:\n{stage_buffer}"
-            "Gunakan full_history untuk memahami konteks.\n"
-            "Gunakan stage_buffer sebagai fokus utama, BUKAN satu-satunya sumber.\n"
+            "Input terbaru pengguna:\n{stage_buffer}\n\n"
+            
+            "INSTRUKSI PENTING:\n"
+            "- Gunakan full_history untuk memahami konteks.\n"
+            "- Gunakan stage_buffer sebagai fokus utama, BUKAN satu-satunya sumber.\n\n"
+            
+            "PRIORITAS UTAMA:\n"
+            "- Selalu berangkat dari kata-kata spesifik user.\n"
+            "- Kutip atau refer ke kata user jika perlu (misal: 'malas', 'capek').\n"
+            "- Jangan menambahkan detail yang tidak disebutkan user.\n"
+            "- Jangan keluar dari konteks yang diberikan user.\n"
         )
     ])
 
