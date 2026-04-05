@@ -71,8 +71,15 @@ if not st.session_state.is_completed:
 
         st.session_state.last_question = next_question
 
-        # --- TAMBAHAN BARU: NOTIFIKASI TOAST ---
-        if new_stage != st.session_state.stage:
+        # --- HANDLE STAGE CHANGE ---
+        old_stage = st.session_state.stage
+        stage_changed = new_stage != old_stage
+
+        # update dulu (penting!)
+        st.session_state.stage = new_stage
+
+        # --- NOTIFIKASI TOAST ---
+        if stage_changed:
             notif_messages = {
                 "relating": "✨ Wah, kamu mulai nemu polanya nih...",
                 "reasoning": "🧠 Analisis kamu makin dalem, mantap!",
@@ -81,9 +88,6 @@ if not st.session_state.is_completed:
             }
             pesan = notif_messages.get(new_stage, "📈 Progres refleksi meningkat!")
             st.toast(pesan, icon="🔔")
-
-        # Update Session State
-        st.session_state.stage = new_stage
         st.session_state.stage_buffer = new_buffer
         st.session_state.full_history += "\nSYSTEM: " + next_question
         
@@ -91,8 +95,9 @@ if not st.session_state.is_completed:
         with st.chat_message("assistant"):
             st.markdown(next_question)
 
-        if new_stage == "reconstructing" and decision == "advance":
-            st.session_state.is_completed = True
-            st.success("--- Refleksi selesai ---")
-            st.write("Terima kasih sudah meluangkan waktu untuk merefleksikan hal ini hari ini.")
+        # --- HANDLE COMPLETION ---
+        if new_stage == "completed":
+            summary = llm.generate_summary(st.session_state.full_history)
+            st.subheader("🪞 Ringkasan Refleksi Kamu")
+            st.write(summary)
             st.balloons()
