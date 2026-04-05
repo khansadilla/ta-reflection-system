@@ -24,7 +24,9 @@ def get_chain(stage, llm, full_history, stage_buffer):
         (
             "human",
             "Riwayat percakapan sebelumnya:\n{full_history}\n\n"
-            "Input terbaru pengguna (fokus pada tahap ini):\n{stage_buffer}"
+            "Input terbaru pengguna:\n{stage_buffer}"
+            "Gunakan full_history untuk memahami konteks.\n"
+            "Gunakan stage_buffer sebagai fokus utama, BUKAN satu-satunya sumber.\n"
         )
     ])
 
