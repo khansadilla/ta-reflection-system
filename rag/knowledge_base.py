@@ -29,7 +29,7 @@ knowledge_base = {
             "Gali reaksi emosional spontan (gut feeling) yang muncul saat kejadian.",
             "Validasi perasaan user tanpa menghakimi (non-judgmental validation).",
             "Identifikasi konflik utama: Apakah masalah teknis, interpersonal, atau internal?",
-            "Gunakan 'paraphrasing' untuk memastikan bot paham inti masalah user.",
+            "Gunakan pemahaman implisit untuk merespon. JANGAN mengulang kalimat user kecuali untuk menyoroti detail spesifik.",
             "Hindari memberikan saran di tahap ini; biarkan user menuangkan emosinya.",
             "Gunakan pertanyaan terbuka (Open-ended questions) untuk memperluas cerita.",
             "Cari 'titik balik' atau momen paling intens dalam cerita user.",
