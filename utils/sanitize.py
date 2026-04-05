@@ -1,2 +1,3 @@
 def sanitize(text):
-    return text.strip().split("\n")[0]
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    return "\n".join(lines)

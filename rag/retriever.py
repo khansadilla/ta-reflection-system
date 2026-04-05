@@ -1,37 +1,59 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import os
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
-from rag.knowledge_base import knowledge_base
+DB_FAISS_PATH = "rag/vectorstore"
 
-# Flatten knowledge per stage
-def get_stage_documents(stage):
-    kb = knowledge_base.get(stage, {})
-    docs = []
+# Global cache (biar ga load berulang)
+_embeddings = None
 
-    for section in ["goal", "guidance", "reflective_pitfalls"]:
-        docs.extend(kb.get(section, []))
+def get_embeddings():
+    global _embeddings
+    if _embeddings is None:
+        print(">>> Loading embeddings model...")
+        _embeddings = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2",
+            model_kwargs={"device": "cpu"}  # biar stabil
+        )
+        print(">>> Embeddings loaded")
+    return _embeddings
 
-    return docs
+_vectorstore = None
 
+def get_vectorstore():
+    global _vectorstore
+    if _vectorstore is None:
+        embeddings = get_embeddings()
+        print(">>> Loading vectorstore...")
+        _vectorstore = FAISS.load_local(
+            DB_FAISS_PATH,
+            embeddings,
+            allow_dangerous_deserialization=True
+        )
+        print(">>> Vectorstore loaded")
+    return _vectorstore
 
 def retrieve(stage, query, k=2):
-    documents = get_stage_documents(stage)
+    try:
+        if not os.path.exists(DB_FAISS_PATH):
+            print(f"Error: Folder {DB_FAISS_PATH} tidak ditemukan.")
+            return ""
 
-    # Gabungkan query ke dalam corpus
-    corpus = documents + [query]
+        embeddings = get_embeddings()
 
-    vectorizer = TfidfVectorizer()
-    tfidf_matrix = vectorizer.fit_transform(corpus)
+        vectorstore = get_vectorstore()
 
-    # Query adalah elemen terakhir
-    query_vector = tfidf_matrix[-1]
-    doc_vectors = tfidf_matrix[:-1]
+        results = vectorstore.similarity_search(
+            query,
+            k=k,
+            filter={"stage": stage}
+        )
 
-    similarities = cosine_similarity(query_vector, doc_vectors)[0]
+        if not results:
+            return "Tidak ada pedoman spesifik ditemukan untuk tahap ini."
 
-    # Ambil index top-k
-    top_indices = similarities.argsort()[-k:][::-1]
+        return "\n".join([doc.page_content for doc in results])
 
-    retrieved = [documents[i] for i in top_indices]
-
-    return "\n".join(retrieved)
+    except Exception as e:
+        print(f"Terjadi kesalahan saat retrieval: {e}")
+        return ""

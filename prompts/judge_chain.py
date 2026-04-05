@@ -63,7 +63,7 @@ def get_judge_chain(stage, llm_judge):
         ),
         (
             "human",
-            "{text}"
+            f"Tahap: {stage}\n Respons Pengguna: {{text}}"
         )
     ])
 

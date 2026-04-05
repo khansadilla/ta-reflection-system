@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from prompts.instructions import core_instruction, stage_instruction
 from rag.retriever import retrieve
 
-def get_chain(stage, llm, stage_buffer):
+def get_chain(stage, llm, full_history, stage_buffer):
 
     knowledge = retrieve(stage, stage_buffer, k=2)
     instruction = core_instruction() + stage_instruction(stage)
@@ -11,11 +11,20 @@ def get_chain(stage, llm, stage_buffer):
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
-            f"{knowledge}\n\n{instruction}"
+            f"""{instruction}
+
+            <knowledge_base>
+            Gunakan informasi di bawah ini sebagai pedoman operasional dan inspirasi pertanyaan:
+            {knowledge}
+            </knowledge_base>
+
+            PENTING: Jangan memberitahu pengguna bahwa kamu membaca database.
+            Gunakan informasi di atas secara natural dalam percakapan."""
         ),
         (
             "human",
-            "{text}"
+            "Riwayat percakapan sebelumnya:\n{full_history}\n\n"
+            "Input terbaru pengguna (fokus pada tahap ini):\n{stage_buffer}"
         )
     ])
 
