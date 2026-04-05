@@ -63,7 +63,16 @@ def get_judge_chain(stage, llm_judge):
         ),
         (
             "human",
-            f"Tahap: {stage}\n Respons Pengguna: {{text}}"
+            f"""
+                TAHAP REFLEKSI: {stage}
+
+                ### KONTEKS PERCAKAPAN
+                Pertanyaan Sistem: {{question}}
+                Respons Pengguna: {{text}}
+
+                Berdasarkan konteks di atas, apakah respons pengguna sudah memenuhi kriteria untuk lanjut? 
+                Keputusan:
+                """
         )
     ])
 
