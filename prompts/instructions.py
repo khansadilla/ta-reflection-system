@@ -9,9 +9,6 @@ def core_instruction():
         "- ADD VALUE: Setiap respon harus menambahkan insight, sudut pandang, atau arah eksplorasi baru.\n"
         "- PROGRESSIVE: Jika user sudah jelas, lanjutkan ke pendalaman, jangan mundur.\n"
         "- NATURAL: Hindari bahasa template atau kaku.\n\n"
-        "- AVOID GENERIC VALIDATION: Jangan selalu mulai dengan 'Aku paham...' atau variasinya. Gunakan variasi natural atau langsung ke insight.\n"
-        "- CUT THE OBVIOUS: Jangan menjelaskan ulang hal yang sudah jelas dari ucapan user. Fokus pada apa yang belum disadari user.\n"
-        "- PRIORITAS: Insight > Validasi > Pertanyaan.\n"
         
         "STRUKTUR RESPON:\n"
         "1. Validasi singkat (opsional, natural)\n"
