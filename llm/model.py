@@ -19,7 +19,7 @@ llm_judge = ChatGroq(
     request_timeout=20
 )'''
 
-llm = ChatOpenAI(
+llm_judge = ChatOpenAI(
     model="gpt-4o-mini",  # murah tapi bagus
     temperature=0
 )
