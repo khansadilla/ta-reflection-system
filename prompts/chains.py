@@ -10,35 +10,29 @@ def get_chain(stage, llm, full_history, stage_buffer):
 
     prompt = ChatPromptTemplate.from_messages([
         (
-            "system",
-            f"""{instruction}
-
-            <knowledge_base>
-            Gunakan informasi di bawah ini HANYA sebagai referensi gaya berpikir dan contoh arah eksplorasi.
-
-            JANGAN menganggap informasi ini sebagai fakta tentang pengguna.
-            JANGAN memasukkan detail dari sini kecuali memang disebutkan oleh pengguna.
-            Jika tidak relevan, abaikan sepenuhnya.
-            {knowledge}
-            </knowledge_base>
-
-            PENTING: Jangan memberitahu pengguna bahwa kamu membaca database.
-            Gunakan informasi di atas secara natural dalam percakapan."""
+            "system",instruction
         ),
         (
-           "human",
-            "Riwayat percakapan sebelumnya:\n{full_history}\n\n"
-            "Input terbaru pengguna:\n{stage_buffer}\n\n"
-            
-            "INSTRUKSI PENTING:\n"
-            "- Gunakan full_history untuk memahami konteks.\n"
-            "- Gunakan stage_buffer sebagai fokus utama, BUKAN satu-satunya sumber.\n\n"
-            
-            "PRIORITAS UTAMA:\n"
-            "- Selalu berangkat dari kata-kata spesifik user.\n"
-            "- Kutip atau refer ke kata user jika perlu (misal: 'malas', 'capek').\n"
-            "- Jangan menambahkan detail yang tidak disebutkan user.\n"
-            "- Jangan keluar dari konteks yang diberikan user.\n"
+           "human",f"""
+            Riwayat percakapan:
+            {full_history}
+
+            Input terbaru:
+            {stage_buffer}
+
+            Context tambahan (REFERENSI SAJA, BUKAN FAKTA USER):
+            {knowledge}
+
+            ATURAN PENGGUNAAN CONTEXT:
+            - Jangan menganggap context sebagai kondisi user.
+            - Gunakan hanya jika ADA KECocokan eksplisit dengan ucapan user.
+            - Jika tidak ada kecocokan, abaikan sepenuhnya.
+
+            INSTRUKSI UTAMA:
+            - Fokus utama tetap pada kata-kata user.
+            - Jika informasi kurang, bertanya, bukan menyimpulkan.
+            - Semua insight harus bisa dilacak ke ucapan user.
+            """
         )
     ])
 
