@@ -53,6 +53,7 @@ for message in st.session_state.messages:
 # 4. Handle Input User
 if not st.session_state.is_completed:
     if user_input := st.chat_input("Ceritain di sini ya..."):
+        st.session_state.last_user_input = user_input
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
             st.markdown(user_input)
@@ -66,7 +67,8 @@ if not st.session_state.is_completed:
                 st.session_state.full_history, 
                 llm, 
                 st.session_state.stage_buffer,
-                st.session_state.last_question
+                st.session_state.last_question,
+                st.session_state.last_user_input
             )
 
         st.session_state.last_question = next_question
@@ -88,6 +90,7 @@ if not st.session_state.is_completed:
             }
             pesan = notif_messages.get(new_stage, "📈 Progres refleksi meningkat!")
             st.toast(pesan, icon="🔔")
+
         st.session_state.stage_buffer = new_buffer
         st.session_state.full_history += "\nSYSTEM: " + next_question
         
