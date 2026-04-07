@@ -2,75 +2,77 @@ from llm.model import llm_judge
 from langchain_core.prompts import ChatPromptTemplate
 from fsm.states import NEXT
 
+
 def judge_stage_instruction(stage, target_stage):
 
     if stage == "reporting_responding":
         return f"""
         Fokus:
-        - Bedakan antara deskripsi/emosi vs pola diri
+        - Bedakan antara deskripsi/emosi vs refleksi diri
 
         Target: {target_stage}
 
-        ADVANCE jika:
-        - User menyebut sifat/kecenderungan diri (perfeksionis, overthinking, dll)
-        - Ada generalisasi (kayaknya aku, sering sih, biasanya)
-        - Ada pola implisit meskipun singkat
+        ADVANCE jika ada minimal satu:
+        - Self-assessment (aku merasa..., aku rasa..., aku kayaknya...)
+        - Sifat/kecenderungan diri (perfeksionis, overthinking, dewasa, siap)
+        - Perubahan kondisi (akhir-akhir ini, sekarang, belakangan ini)
+        - Generalisasi ringan (biasanya, sering, kayaknya aku)
 
         STAY jika:
         - Hanya cerita kejadian
         - Hanya emosi tanpa refleksi diri
         """
 
-    if stage == "relating":
-        return f"""
+            if stage == "relating":
+                return f"""
         Fokus:
-        - Bedakan antara pola vs penyebab
+        - Pola → penyebab
 
         Target: {target_stage}
 
-        ADVANCE jika:
-        - User mulai menjelaskan "kenapa"
-        - Ada hipotesis penyebab (meskipun belum yakin)
-        - Menyebut faktor internal (takut gagal, tekanan, dll)
+        ADVANCE jika ada:
+        - Penjelasan "kenapa"
+        - Hipotesis penyebab (mungkin karena...)
+        - Faktor internal (takut gagal, tekanan, dll)
 
         STAY jika:
-        - Hanya menyebut pola tanpa penjelasan
+        - Hanya menyebut pola tanpa sebab
         """
 
     if stage == "reasoning":
         return f"""
         Fokus:
-        - Bedakan antara hipotesis vs insight
+        - Penyebab → insight
 
         Target: {target_stage}
 
-        ADVANCE jika:
-        - Ada insight baru (aku mulai sadar…, ternyata…)
-        - Ada perubahan cara pandang
-        - User menyadari dampak dari pola pikirnya
+        ADVANCE jika ada:
+        - Insight (aku mulai sadar…, ternyata…)
+        - Perubahan cara pandang
+        - Pemahaman dampak dari pola
 
         STAY jika:
-        - Hanya menebak penyebab tanpa insight
+        - Masih hipotesis tanpa insight
         """
 
-    if stage == "reconstructing":
-        return f"""
+            if stage == "reconstructing":
+                return """
         Fokus:
-        - Bedakan antara insight vs aksi
+        - Insight → aksi
 
         Target: COMPLETED
 
         ADVANCE jika:
         - Ada tindakan konkret
-        - Ada langkah spesifik (misalnya: "aku akan mulai...")
-        - Realistis dan bisa dilakukan
+        - Ada langkah spesifik (aku akan mulai...)
+        - Realistis
 
         STAY jika:
-        - Masih berupa insight
-        - Masih abstrak (harus lebih baik, pengen berubah)
+        - Masih insight / niat umum
         """
 
     return ""
+
 
 def get_judge_chain(stage, llm_judge):
 
@@ -81,37 +83,28 @@ def get_judge_chain(stage, llm_judge):
         (
             "system",
             f"""
-            Kamu adalah evaluator refleksi berbasis framework 5R.
+                Kamu adalah evaluator refleksi berbasis framework 5R.
 
-            Tahap saat ini: {stage}
-            Tahap target: {target_stage}
+                Tahap saat ini: {stage}
+                Tahap target: {target_stage}
 
-            Tugasmu:
-            Menentukan apakah respons user menunjukkan PERGERAKAN
-            dari tahap saat ini menuju tahap target.
+                Tugas:
+                Menentukan apakah respons user menunjukkan PERGERAKAN ke tahap berikutnya.
 
-            {stage_instruction}
+                {stage_instruction}
 
-            ATURAN PENTING:
-            - Gunakan interpretasi semantik, bukan literal
-            - Tangkap sinyal implisit (tidak harus eksplisit)
-            - Jangan menunggu jawaban sempurna
-            - Lebih baik ADVANCE sedikit lebih cepat daripada terlalu lambat
+                ATURAN:
+                - Gunakan interpretasi semantik
+                - Tangkap sinyal implisit
+                - Jangan tunggu jawaban sempurna
+                - Cukup satu sinyal → ADVANCE
+                - Jangan lompat lebih dari satu tahap
 
-            CONTOH SINYAL IMPLISIT:
-            - "aku perfeksionis" → pola
-            - "aku takut gagal" → penyebab
-            - "kayaknya aku emang gini" → refleksi diri
-            - "what if..." → reasoning awal
+                Jika ragu → pilih ADVANCE
 
-            ATURAN KEPUTUSAN:
-            - ADVANCE jika ADA indikasi menuju tahap target
-            - STAY jika TIDAK ADA indikasi sama sekali
-
-            OUTPUT:
-            Hanya satu kata:
-            ADVANCE atau STAY
-            """
+                OUTPUT:
+                ADVANCE atau STAY
+                """
         ),
         (
             "human",
