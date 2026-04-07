@@ -14,9 +14,6 @@ def get_chain(stage, llm, full_history, stage_buffer):
         ),
         (
            "human",f"""
-            Riwayat percakapan:
-            {full_history}
-
             Input terbaru:
             {stage_buffer}
 
