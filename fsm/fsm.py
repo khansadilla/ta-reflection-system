@@ -1,7 +1,7 @@
 from fsm.states import NEXT
 from prompts.chains import get_chain
 from prompts.judge_chain import get_judge_chain
-from utils.sanitize import sanitize
+from utils.utils import sanitize
 from llm.model import llm_judge
 
 # 1. Update llm_gate buat nerima last_question
