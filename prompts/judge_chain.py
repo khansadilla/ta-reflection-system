@@ -7,24 +7,24 @@ def judge_stage_instruction(stage, target_stage):
 
     if stage == "reporting_responding":
         return f"""
-        Fokus:
-        - Bedakan antara deskripsi/emosi vs refleksi diri
+    Fokus:
+    - Bedakan antara deskripsi/emosi vs refleksi diri
 
-        Target: {target_stage}
+    Target: {target_stage}
 
-        ADVANCE jika ada minimal satu:
-        - Self-assessment (aku merasa..., aku rasa..., aku kayaknya...)
-        - Sifat/kecenderungan diri (perfeksionis, overthinking, dewasa, siap)
-        - Perubahan kondisi (akhir-akhir ini, sekarang, belakangan ini)
-        - Generalisasi ringan (biasanya, sering, kayaknya aku)
+    ADVANCE jika ada minimal satu:
+    - Self-assessment (aku merasa..., aku rasa..., aku kayaknya...)
+    - Sifat/kecenderungan diri (perfeksionis, overthinking, dewasa, siap)
+    - Perubahan kondisi (akhir-akhir ini, sekarang, belakangan ini)
+    - Generalisasi ringan (biasanya, sering, kayaknya aku)
 
-        STAY jika:
-        - Hanya cerita kejadian
-        - Hanya emosi tanpa refleksi diri
-        """
+    STAY jika:
+    - Hanya cerita kejadian
+    - Hanya emosi tanpa refleksi diri
+    """
 
-            if stage == "relating":
-                return f"""
+    if stage == "relating":
+        return f"""
         Fokus:
         - Pola → penyebab
 
@@ -55,8 +55,8 @@ def judge_stage_instruction(stage, target_stage):
         - Masih hipotesis tanpa insight
         """
 
-            if stage == "reconstructing":
-                return """
+    if stage == "reconstructing":
+        return """
         Fokus:
         - Insight → aksi
 
