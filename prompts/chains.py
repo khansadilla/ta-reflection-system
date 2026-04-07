@@ -14,22 +14,33 @@ def get_chain(stage, llm, full_history, stage_buffer):
             "system",instruction
         ),
         (
-           "human",f"""
-            Input terbaru:
+           "human",    f"""
+            RIWAYAT PERCAKAPAN (untuk menjaga alur):
+            {recent_history}
+
+            FOKUS REFLEKSI SAAT INI (inti pembahasan):
             {stage_buffer}
 
-            Context tambahan (REFERENSI SAJA, BUKAN FAKTA USER):
+            INPUT TERBARU:
+            {stage_buffer.split("\n")[-1]}
+
+            CONTEXT TAMBAHAN (REFERENSI SAJA, BUKAN FAKTA USER):
             {knowledge}
 
-            ATURAN PENGGUNAAN CONTEXT:
-            - Jangan menganggap context sebagai kondisi user.
-            - Gunakan hanya jika ADA KECocokan eksplisit dengan ucapan user.
-            - Jika tidak ada kecocokan, abaikan sepenuhnya.
+            ATURAN MEMBACA KONTEKS:
+            - Gunakan RIWAYAT hanya untuk memahami alur percakapan
+            - Gunakan FOKUS REFLEKSI untuk memahami inti masalah user
+            - Prioritaskan INPUT TERBARU dalam merespons
 
-            INSTRUKSI UTAMA:
-            - Fokus utama tetap pada kata-kata user.
-            - Jika informasi kurang, bertanya, bukan menyimpulkan.
-            - Semua insight harus bisa dilacak ke ucapan user.
+            ATURAN PERCAKAPAN:
+            - Jangan memulai ulang percakapan
+            - Jangan menyapa seperti percakapan baru
+            - Langsung lanjut dari konteks yang ada
+
+            ATURAN ANALISIS:
+            - Semua insight harus bisa dilacak ke ucapan user
+            - Jangan mengasumsikan hal yang tidak dikatakan
+            - Jika informasi kurang → bertanya, bukan menyimpulkan
             """
         )
     ])
