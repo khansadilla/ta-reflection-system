@@ -1,6 +1,7 @@
 from llm.model import llm_judge
 from rag.knowledge_base import transition_indicators
 from langchain_core.prompts import ChatPromptTemplate
+from fsm.states import NEXT
 
 def format_indicators(stage):
     indicators = transition_indicators.get(stage,{})
@@ -12,6 +13,8 @@ def format_indicators(stage):
     
 
 def get_judge_chain(stage, llm_judge):
+
+    next
 
     indikator_text = format_indicators(stage)
 
@@ -33,22 +36,8 @@ def get_judge_chain(stage, llm_judge):
             - Jika memenuhi KRITERIA ADVANCE → ADVANCE
             - Jika tidak → STAY
 
-            ADVANCE hanya jika respons jelas memenuhi KRITERIA ADVANCE.
-            Jika respons tidak jelas memenuhi kriteria tersebut → STAY.
+            ADVANCE jika jawaban sudah cukup memenuhi kriteria advance.
 
-            Contoh:
-
-            Respons: Aku habis debat kecil sama teman
-            Keputusan: STAY
-
-            Respons: Aku merasa gugup saat presentasi
-            Keputusan: STAY
-
-            Respons: Kalau ada konflik aku biasanya langsung defensif
-            Keputusan: ADVANCE
-
-            Respons: Aku mulai sadar standar itu terlalu tinggi untuk diriku
-            Keputusan: ADVANCE
             Aturan OUTPUT (WAJIB):
             -Output harus tepat satu kata
             -Hanya boleh: ADVANCE atau STAY
