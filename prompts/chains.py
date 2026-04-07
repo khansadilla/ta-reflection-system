@@ -24,9 +24,6 @@ def get_chain(stage, llm, full_history, stage_buffer):
             INPUT TERBARU:
             {stage_buffer.split("\n")[-1]}
 
-            CONTEXT TAMBAHAN (REFERENSI SAJA, BUKAN FAKTA USER):
-            {knowledge}
-
             ATURAN MEMBACA KONTEKS:
             - Gunakan RIWAYAT hanya untuk memahami alur percakapan
             - Gunakan FOKUS REFLEKSI untuk memahami inti masalah user
