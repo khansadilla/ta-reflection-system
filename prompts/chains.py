@@ -15,19 +15,20 @@ def get_chain(stage, llm, full_history, stage_buffer):
         ),
         (
            "human",    f"""
-            RIWAYAT PERCAKAPAN (untuk menjaga alur):
-            {recent_history}
-
-            FOKUS REFLEKSI SAAT INI (inti pembahasan):
-            {stage_buffer}
-
-            INPUT TERBARU:
-            {stage_buffer.split("\n")[-1]}
 
             ATURAN MEMBACA KONTEKS:
             - Gunakan RIWAYAT hanya untuk memahami alur percakapan
             - Gunakan FOKUS REFLEKSI untuk memahami inti masalah user
             - Prioritaskan INPUT TERBARU dalam merespons
+            
+            INPUT TERBARU:
+            {stage_buffer.split("\n")[-1]}
+
+            FOKUS REFLEKSI SAAT INI (inti pembahasan):
+            {stage_buffer}
+
+            RIWAYAT PERCAKAPAN (untuk menjaga alur):
+            {recent_history}
 
             ATURAN PERCAKAPAN:
             - Jangan memulai ulang percakapan
