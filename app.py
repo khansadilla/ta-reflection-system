@@ -59,7 +59,7 @@ if not st.session_state.is_completed:
         if st.session_state.stage == "completed":
             st.session_state.is_completed = True
 
-            summary = llm.generate_summary(st.session_state.full_history)
+            summary = llm.invoke(f"Ringkas refleksi berikut:\n{st.session_state.full_history}").content
             st.subheader("🪞 Ringkasan Refleksi Kamu")
             st.write(summary)
             st.balloons()
