@@ -102,7 +102,6 @@ if not st.session_state.is_completed:
             pesan = notif_messages.get(curr_stage, "📈 Progres refleksi meningkat!")
             st.toast(pesan, icon="🔔")
             
-
         st.session_state.previous_stage = curr_stage
         st.session_state.stage = curr_stage
 

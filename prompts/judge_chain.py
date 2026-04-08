@@ -109,10 +109,8 @@ def get_judge_chain(stage, llm_judge):
         (
             "human",
             """
-            Pertanyaan sebelumnya:
-            {question}
+            Berikut adalah beberapa percakapan terakhir:
 
-            Respons user:
             {text}
 
             Keputusan:
