@@ -74,8 +74,6 @@ if not st.session_state.is_completed:
                 st.session_state.last_user_input
             )
 
-        st.session_state.last_question = next_question
-
         # --- HANDLE STAGE CHANGE ---
         prev_stage = st.session_state.previous_stage
         curr_stage = new_stage
@@ -94,19 +92,13 @@ if not st.session_state.is_completed:
             }
             pesan = notif_messages.get(curr_stage, "📈 Progres refleksi meningkat!")
             st.toast(pesan, icon="🔔")
+            
 
         st.session_state.previous_stage = curr_stage
         st.session_state.stage = curr_stage
 
         st.session_state.stage_buffer = new_buffer
-        if next_question is not None:
-            st.session_state.full_history += "\nSYSTEM: " + next_question
-        
-        st.session_state.messages.append({"role": "assistant", "content": next_question})
-        with st.chat_message("assistant"):
-            st.markdown(next_question)
 
-        # --- HANDLE COMPLETION ---
         if new_stage == "completed":
             st.session_state.is_completed = True
 
@@ -114,3 +106,12 @@ if not st.session_state.is_completed:
             st.subheader("🪞 Ringkasan Refleksi Kamu")
             st.write(summary)
             st.balloons()
+            st.stop()
+
+        if next_question is not None:
+            st.session_state.last_question = next_question
+            st.session_state.full_history += "\nSYSTEM: " + next_question
+            
+            st.session_state.messages.append({"role": "assistant", "content": next_question})
+            with st.chat_message("assistant"):
+                st.markdown(next_question)
