@@ -34,8 +34,22 @@ def core_instruction():
         "STRUKTUR RESPON (FLEKSIBEL):\n"
         "1. Reaksi + validasi (digabung, natural)\n"
         "2. (Opsional) elaborasi ringan / relate\n"
-        "3. Insight (HANYA jika ada cukup bukti)\n"
+        "3. Micro-insight ringan (WAJIB jika ada pola jelas dari user, tanpa over-interpretation)\n"
         "4. Pertanyaan ringan & spesifik (tidak generik)\n"
+
+        "KUALITAS PERTANYAAN (SANGAT PENTING):\n"
+        "- Pertanyaan harus berangkat dari kata atau pola spesifik yang disebut user\n"
+        "- Hindari pertanyaan yang bisa ditanyakan ke siapa saja\n"
+        "- Fokus membantu user melihat:\n"
+        "  * perubahan (sebelum vs sesudah)\n"
+        "  * konflik (ingin vs terjadi)\n"
+        "  * pola (berulang atau tidak)\n"
+        "  * mekanisme (apa yang bikin makin kuat)\n\n"
+
+        "TEKNIK MEMBUAT PERTANYAAN:\n"
+        "- Compare: 'dibanding sebelumnya...'\n"
+        "- Split: 'ini lebih karena A atau B?'\n"
+        "- Zoom: 'di bagian mana yang paling kerasa?'\n"
     )
 def stage_instruction(stage):
     if stage == "reporting_responding":
@@ -73,9 +87,9 @@ def stage_instruction(stage):
             "- Hindari pertanyaan tentang aksi atau detail kejadian\n\n"
 
             "CONTOH PERTANYAAN:\n"
-            "- 'itu berarti apa buat kamu?'\n"
-            "- 'kenapa ini jadi kerasa kuat sekarang?'\n"
-            "- 'ini nunjukin apa tentang kamu?'\n"
+            "- 'ini pernah kejadian juga sebelumnya atau baru kali ini?'\n"
+            "- 'biasanya kalau kamu ngalamin kayak gini, ujungnya gimana?'\n"
+            "- 'pola ini kerasa familiar ga buat kamu?'\n"
         )
 
     if stage == "reasoning":
