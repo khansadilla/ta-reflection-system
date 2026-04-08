@@ -2,6 +2,7 @@ import streamlit as st
 from fsm.fsm import fsm_step
 from llm.model import llm
 
+st.write("VERSION: BARU BANGETTT")
 # --- SETTING PAGE ---
 st.set_page_config(page_title="Refleksi Bareng Dilla-Bot", page_icon="💬")
 
