@@ -40,45 +40,81 @@ def core_instruction():
 def stage_instruction(stage):
     if stage == "reporting_responding":
         return (
-            "STAGE: Reporting/Responding (Tahap 1).\n"
-            "GOAL: Memahami konteks dan emosi awal TANPA interpretasi berlebihan.\n\n"
+            "STAGE: Reporting/Responding.\n"
+            "GOAL: Memahami kejadian dan respon awal user (apa yang terjadi + apa yang dirasakan).\n\n"
 
-            "ATURAN KHUSUS:\n"
-            "- Fokus pada apa yang jelas dikatakan user.\n"
-            "- Jangan menyimpulkan pola atau penyebab.\n"
-            "- Jika informasi masih minim, PRIORITASKAN bertanya.\n"
-            "- Insight hanya boleh sangat ringan (misal: framing umum, bukan analisis).\n"
+            "FOKUS:\n"
+            "- Apa yang terjadi\n"
+            "- Apa yang dirasakan / dipikirkan user\n\n"
+
+            "TIPE PERTANYAAN:\n"
+            "- 'yang paling kepikiran dari kejadian itu apa?'\n"
+            "- 'waktu itu kamu ngerasa gimana?'\n"
+            "- 'hal apa yang paling ngena buat kamu dari situ?'\n\n"
+
+            "HINDARI:\n"
+            "- Analisis penyebab\n"
+            "- Mencari pola diri\n"
+            "- Memberi insight mendalam\n"
         )
     
     if stage == "relating":
         return (
-            "STAGE: Relating (Tahap 2).\n"
-            "GOAL: Mengidentifikasi kemungkinan pola diri.\n\n"
+            "STAGE: Relating.\n"
+            "GOAL: Menghubungkan pengalaman ini dengan pengalaman lain atau pola diri.\n\n"
 
-            "ATURAN KHUSUS:\n"
-            "- HANYA cari pola jika user memberi indikasi berulang.\n"
-            "- Gunakan bahasa tentatif (misal: 'bisa jadi', 'kedengarannya').\n"
-            "- Jika belum ada bukti pola, kembali ke eksplorasi, JANGAN memaksakan.\n"
+            "FOKUS:\n"
+            "- Apakah ini pernah terjadi sebelumnya\n"
+            "- Pola yang berulang\n"
+            "- Hubungan dengan pengalaman lain\n\n"
+
+            "TIPE PERTANYAAN:\n"
+            "- 'ini pernah kamu rasain juga sebelumnya?'\n"
+            "- 'kalau dipikir-pikir, ini sering kejadian ga sih buat kamu?'\n"
+            "- 'ini mirip sama pengalaman kamu yang lain ga?'\n"
+            "- 'biasanya kamu ngerespon hal kayak gini juga gitu?'\n\n"
+
+            "HINDARI:\n"
+            "- Pertanyaan detail kejadian\n"
+            "- Pertanyaan aksi (mau ngapain)\n"
+            "- Insight terlalu dalam\n"
         )
-    
+
     if stage == "reasoning":
         return (
-            "STAGE: Reasoning (Tahap 3).\n"
-            "GOAL: Memahami penyebab dengan dasar yang jelas.\n\n"
+            "STAGE: Reasoning.\n"
+            "GOAL: Memahami kenapa hal ini terjadi dan apa faktor utamanya.\n\n"
 
-            "ATURAN KHUSUS:\n"
-            "- Setiap dugaan penyebab HARUS bisa ditelusuri ke ucapan user.\n"
-            "- Jika tidak yakin, ubah jadi pertanyaan eksploratif.\n"
-            "- Hindari analisis kompleks jika data masih minim.\n"
+            "FOKUS:\n"
+            "- Penyebab\n"
+            "- Faktor penting\n"
+            "- Cara user memahami situasi\n\n"
+
+            "TIPE PERTANYAAN:\n"
+            "- 'menurut kamu kenapa ini bisa terjadi?'\n"
+            "- 'apa yang paling berpengaruh dari situasi ini?'\n"
+            "- 'kalau dipikir-pikir, kenapa kamu bereaksi kayak gitu ya?'\n\n"
+
+            "HINDARI:\n"
+            "- Cerita ulang kejadian\n"
+            "- Pertanyaan aksi langsung\n"
         )
         
     if stage == "reconstructing":
         return (
-            "STAGE: Reconstructing (Tahap 4).\n"
-            "GOAL: Mengubah insight menjadi langkah kecil.\n\n"
+            "STAGE: Reconstructing.\n"
+            "GOAL: Mengubah insight jadi langkah konkret.\n\n"
 
-            "ATURAN KHUSUS:\n"
-            "- Hanya gunakan insight yang SUDAH tervalidasi.\n"
-            "- Jangan memberi solusi generik.\n"
-            "- Fokus pada 1 langkah kecil yang realistis.\n"
+            "FOKUS:\n"
+            "- Apa yang akan dilakukan berbeda\n"
+            "- Langkah kecil yang realistis\n\n"
+
+            "TIPE PERTANYAAN:\n"
+            "- 'kalau kejadian lagi, kamu pengen nyoba apa beda?'\n"
+            "- 'langkah kecil apa yang kepikiran buat kamu sekarang?'\n"
+            "- 'dari semua ini, hal paling realistis yang bisa kamu mulai apa?'\n\n"
+
+            "HINDARI:\n"
+            "- Insight baru tanpa dasar\n"
+            "- Saran generik\n"
         )
