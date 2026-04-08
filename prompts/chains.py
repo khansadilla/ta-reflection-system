@@ -11,7 +11,13 @@ def get_chain(stage, llm, full_history, stage_buffer):
 
     prompt = ChatPromptTemplate.from_messages([
         (
-            "system",instruction
+            "system",f"""
+            STAGE INSTRUCTION:
+            {stage_instruction}
+
+            CORE INSTRUCTION
+            {core_instruction}
+            """
         ),
         (
            "human",    f"""
