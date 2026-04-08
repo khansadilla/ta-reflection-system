@@ -19,14 +19,13 @@ def llm_gate(stage, stage_buffer, last_question):
 
 # 2. Update fsm_step buat nerima last_question
 def fsm_step(stage, full_history, llm, stage_buffer, last_question, last_user_input):
-    if new_stage=="completed":
-        return new_stage, None, stage_buffer, decision
 
     # Oper last_question ke llm_gate
     decision = llm_gate(stage, last_user_input, last_question)
     
     new_stage = NEXT[stage] if decision == "advance" else stage
-
+    if new_stage=="completed":
+        return new_stage, None, stage_buffer, decision
 
     if decision == "advance":
         stage_buffer = ""
