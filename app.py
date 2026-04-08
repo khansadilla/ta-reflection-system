@@ -44,7 +44,10 @@ if "is_completed" not in st.session_state:
 if "last_question" not in st.session_state:
     # Isi dengan pertanyaan pertama biar Judge punya konteks awal
     st.session_state.last_question = "Kalau kamu memilih satu hal yang paling ingin kamu refleksikan hari ini, apa itu?"
-    
+
+if "previous_stage" not in st.session_state:
+    st.session_state.previous_stage = None
+
 # 3. Tampilin Chat History
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -74,11 +77,12 @@ if not st.session_state.is_completed:
         st.session_state.last_question = next_question
 
         # --- HANDLE STAGE CHANGE ---
-        old_stage = st.session_state.stage
-        stage_changed = new_stage != old_stage
+        prev_stage = st.session_state.previous_stage
+        curr_stage = new_stage
 
-        # update dulu (penting!)
-        st.session_state.stage = new_stage
+        stage_changed = (curr_stage != prev_stage) and (prev_stage is not None)
+
+        st.session_state.stage = curr_stage
 
         # --- NOTIFIKASI TOAST ---
         if stage_changed:
@@ -88,8 +92,11 @@ if not st.session_state.is_completed:
                 "reconstructing": "🚀 Sip! Saatnya kita susun rencana nyata.",
                 "completed": "✅ Refleksi selesai! Bangga banget sama kamu!"
             }
-            pesan = notif_messages.get(new_stage, "📈 Progres refleksi meningkat!")
+            pesan = notif_messages.get(curr_stage, "📈 Progres refleksi meningkat!")
             st.toast(pesan, icon="🔔")
+
+        st.session_state.previous_stage = curr_stage
+        st.session_state.stage = curr_stage
 
         st.session_state.stage_buffer = new_buffer
         st.session_state.full_history += "\nSYSTEM: " + next_question
@@ -100,6 +107,8 @@ if not st.session_state.is_completed:
 
         # --- HANDLE COMPLETION ---
         if new_stage == "completed":
+            st.session_state.is_completed = True
+
             summary = llm.generate_summary(st.session_state.full_history)
             st.subheader("🪞 Ringkasan Refleksi Kamu")
             st.write(summary)

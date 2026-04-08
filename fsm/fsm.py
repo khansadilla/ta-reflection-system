@@ -25,6 +25,9 @@ def fsm_step(stage, full_history, llm, stage_buffer, last_question, last_user_in
     
     new_stage = NEXT[stage] if decision == "advance" else stage
 
+    if new_stage=="completed":
+        return
+
     if decision == "advance":
         stage_buffer = ""
 
