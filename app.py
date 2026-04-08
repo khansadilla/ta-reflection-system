@@ -56,6 +56,15 @@ for message in st.session_state.messages:
 # 4. Handle Input User
 if not st.session_state.is_completed:
     if user_input := st.chat_input("Ceritain di sini ya..."):
+        if st.session_state.stage == "completed":
+            st.session_state.is_completed = True
+
+            summary = llm.generate_summary(st.session_state.full_history)
+            st.subheader("🪞 Ringkasan Refleksi Kamu")
+            st.write(summary)
+            st.balloons()
+            st.stop()
+
         st.session_state.last_user_input = user_input
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
@@ -98,15 +107,6 @@ if not st.session_state.is_completed:
         st.session_state.stage = curr_stage
 
         st.session_state.stage_buffer = new_buffer
-
-        if new_stage == "completed":
-            st.session_state.is_completed = True
-
-            summary = llm.generate_summary(st.session_state.full_history)
-            st.subheader("🪞 Ringkasan Refleksi Kamu")
-            st.write(summary)
-            st.balloons()
-            st.stop()
 
         if next_question is not None:
             st.session_state.last_question = next_question
