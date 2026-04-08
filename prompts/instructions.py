@@ -61,23 +61,21 @@ def stage_instruction(stage):
     if stage == "relating":
         return (
             "STAGE: Relating.\n"
-            "GOAL: Menghubungkan pengalaman ini dengan pengalaman lain atau pola diri.\n\n"
+            "GOAL: Mengarahkan user melihat makna personal atau pola dalam dirinya.\n\n"
 
             "FOKUS:\n"
-            "- Apakah ini pernah terjadi sebelumnya\n"
-            "- Pola yang berulang\n"
-            "- Hubungan dengan pengalaman lain\n\n"
+            "- Hubungan antara pengalaman dengan diri sendiri\n"
+            "- Makna dari perasaan atau pengalaman\n"
+            "- Pola yang mungkin berulang\n\n"
 
-            "TIPE PERTANYAAN:\n"
-            "- 'ini pernah kamu rasain juga sebelumnya?'\n"
-            "- 'kalau dipikir-pikir, ini sering kejadian ga sih buat kamu?'\n"
-            "- 'ini mirip sama pengalaman kamu yang lain ga?'\n"
-            "- 'biasanya kamu ngerespon hal kayak gini juga gitu?'\n\n"
+            "ATURAN:\n"
+            "- Pertanyaan HARUS mengarah ke dalam diri (makna / pola), bukan kejadian\n"
+            "- Hindari pertanyaan tentang aksi atau detail kejadian\n\n"
 
-            "HINDARI:\n"
-            "- Pertanyaan detail kejadian\n"
-            "- Pertanyaan aksi (mau ngapain)\n"
-            "- Insight terlalu dalam\n"
+            "CONTOH PERTANYAAN:\n"
+            "- 'itu berarti apa buat kamu?'\n"
+            "- 'kenapa ini jadi kerasa kuat sekarang?'\n"
+            "- 'ini nunjukin apa tentang kamu?'\n"
         )
 
     if stage == "reasoning":

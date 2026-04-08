@@ -18,15 +18,18 @@ def get_chain(stage, llm, full_history, stage_buffer):
 
             ATURAN MEMBACA KONTEKS:
             - Gunakan RIWAYAT hanya untuk memahami alur percakapan
-            - Gunakan FOKUS REFLEKSI untuk memahami inti masalah user
-            - Prioritaskan INPUT TERBARU dalam merespons
+            - Gunakan INPUT TERBARU sebagai titik masuk
+            - Gunakan FOKUS REFLEKSI untuk memahami makna yang lebih dalam
             
-            INPUT TERBARU:
-            {stage_buffer.split("\n")[-1]}
 
             FOKUS REFLEKSI SAAT INI (inti pembahasan):
+            - Ini adalah kumpulan pemikiran user yang menunjukkan arah refleksi
+            - Gunakan ini untuk memahami pola atau makna yang sedang berkembang
             {stage_buffer}
 
+            INPUT TERBARU:
+            {stage_buffer.split("\n")[-1]}
+            
             RIWAYAT PERCAKAPAN (untuk menjaga alur):
             {recent_history}
 
