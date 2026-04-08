@@ -99,7 +99,8 @@ if not st.session_state.is_completed:
         st.session_state.stage = curr_stage
 
         st.session_state.stage_buffer = new_buffer
-        st.session_state.full_history += "\nSYSTEM: " + next_question
+        if next_question is not None:
+            st.session_state.full_history += "\nSYSTEM: " + next_question
         
         st.session_state.messages.append({"role": "assistant", "content": next_question})
         with st.chat_message("assistant"):
