@@ -7,68 +7,71 @@ def judge_stage_instruction(stage, target_stage):
 
     if stage == "reporting_responding":
         return f"""
-    Fokus:
-    - Bedakan antara deskripsi/emosi vs refleksi diri
-
-    Target: {target_stage}
-
-    ADVANCE jika ada minimal satu:
-    - Self-assessment (aku merasa..., aku rasa..., aku kayaknya...)
-    - Sifat/kecenderungan diri (perfeksionis, overthinking, dewasa, siap)
-    - Perubahan kondisi (akhir-akhir ini, sekarang, belakangan ini)
-    - Generalisasi ringan (biasanya, sering, kayaknya aku)
-
-    STAY jika:
-    - Hanya cerita kejadian
-    - Hanya emosi tanpa refleksi diri
-    """
-
-    if stage == "relating":
-        return f"""
-        Fokus:
-        - Pola → penyebab
+        Fokus: Deskripsi/emosi → refleksi diri
 
         Target: {target_stage}
 
-        ADVANCE jika ada:
-        - Penjelasan "kenapa"
-        - Hipotesis penyebab (mungkin karena...)
-        - Faktor internal (takut gagal, tekanan, dll)
+        ADVANCE hanya jika user menunjukkan SEMUA ini:
+        - Sudah menceritakan apa yang terjadi (konteks jelas)
+        - Sudah mengekspresikan perasaan/reaksi personal
+        - Ada minimal satu sinyal refleksi diri:
+          (aku merasa..., aku kayaknya..., aku sering...)
 
         STAY jika:
-        - Hanya menyebut pola tanpa sebab
+        - Konteks kejadian masih samar
+        - Hanya emosi tanpa refleksi diri
+        - Jawaban terlalu singkat (1-3 kata)
+        """
+
+    if stage == "relating":
+        return f"""
+        Fokus: Pola → penyebab
+
+        Target: {target_stage}
+
+        ADVANCE hanya jika:
+        - User sudah menghubungkan pengalaman dengan pola diri
+        - Ada penjelasan "kenapa" yang jelas
+        - Ada faktor internal yang disebutkan (takut gagal, tidak percaya diri, dll)
+
+        STAY jika:
+        - Hanya menyebut pola tanpa sebab ("iya sering terjadi")
+        - Penyebab masih samar atau eksternal saja
+        - Belum ada koneksi ke diri sendiri
         """
 
     if stage == "reasoning":
         return f"""
-        Fokus:
-        - Penyebab → insight
+        Fokus: Penyebab → insight bermakna
 
         Target: {target_stage}
 
-        ADVANCE jika ada:
-        - Insight (aku mulai sadar…, ternyata…)
-        - Perubahan cara pandang
-        - Pemahaman dampak dari pola
+        ADVANCE hanya jika:
+        - Ada insight eksplisit (aku sadar..., ternyata..., aku baru nyadar...)
+        - Ada perubahan cara pandang yang jelas
+        - User bisa menjelaskan DAMPAK dari pola yang ditemukan
 
         STAY jika:
-        - Masih hipotesis tanpa insight
+        - Masih hipotesis tanpa insight (mungkin karena...)
+        - Insight terlalu dangkal atau generik
+        - Belum ada pemahaman dampak
         """
 
     if stage == "reconstructing":
         return """
-        Fokus:
-        - Insight → aksi
+        Fokus: Insight → aksi KONKRET
 
         Target: COMPLETED
 
-        ADVANCE jika:
-        - Ada tindakan konkret
-        - Ada langkah spesifik (aku akan mulai...)
-        - Realistis
+        ADVANCE hanya jika user menyebutkan:
+        - Tindakan spesifik yang akan dilakukan (bukan niat umum)
+        - Ada konteks kapan/bagaimana akan dilakukan
+        - Ada alasan kenapa itu akan berhasil
 
         STAY jika:
-        - Masih insight / niat umum
+        - Masih niat umum ("aku mau lebih baik", "aku akan coba")
+        - Tidak ada langkah konkret
+        - Tidak ada argumen kenapa rencana itu akan works
         """
 
     return ""
@@ -77,39 +80,37 @@ def judge_stage_instruction(stage, target_stage):
 def get_judge_chain(stage, llm_judge):
 
     target_stage = NEXT.get(stage, "completed")
-    stage_instruction = judge_stage_instruction(stage, target_stage)
+    stage_instr = judge_stage_instruction(stage, target_stage)
 
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
             f"""
-                Kamu adalah evaluator refleksi berbasis framework 5R.
+            Kamu adalah evaluator refleksi berbasis framework 5R yang ketat.
 
-                Tahap saat ini: {stage}
-                Tahap target: {target_stage}
+            Tahap saat ini: {stage}
+            Tahap target: {target_stage}
 
-                Tugas:
-                Menentukan apakah respons user menunjukkan PERGERAKAN ke tahap berikutnya.
+            Tugas:
+            Tentukan apakah user BENAR-BENAR sudah memenuhi indikator tahap saat ini
+            sebelum boleh maju ke tahap berikutnya.
 
-                {stage_instruction}
+            {stage_instr}
 
-                ATURAN:
-                - Gunakan interpretasi semantik
-                - Tangkap sinyal implisit
-                - Jangan tunggu jawaban sempurna
-                - Cukup satu sinyal → ADVANCE
-                - Jangan lompat lebih dari satu tahap
+            ATURAN PENTING:
+            - Jangan mudah ADVANCE — refleksi yang dangkal merugikan user
+            - Jawaban singkat (1-5 kata) hampir selalu STAY
+            - Sinyal implisit boleh ditangkap, tapi harus jelas
+            - Jika ragu → pilih STAY
 
-                Jika ragu → pilih ADVANCE
-
-                OUTPUT:
-                ADVANCE atau STAY
-                """
+            OUTPUT:
+            Hanya tulis ADVANCE atau STAY, tanpa penjelasan.
+            """
         ),
         (
             "human",
             """
-            Berikut adalah beberapa percakapan terakhir:
+            Percakapan terakhir:
 
             {text}
 
