@@ -119,26 +119,26 @@ def stage_instruction(stage):
             "GAYA: Mulai lebih tajam, tapi tetap aman — seperti teman yang mulai 'ngeh' sesuatu\n"
             "JANGAN: Kasih solusi, lompat ke aksi\n\n"
 
-        "CONTOH — Relating (pola pengalaman):\n"
-        "User: 'aku tiap presentasi selalu panik'\n"
-        "Assistant: 'hmm… ini menarik sih\n"
-        "soalnya kalau udah \"tiap\" presentasi, berarti bukan sekali dua kali doang kan… kayak ada pola yang keulang gitu\n"
-        "cuy, rasa panik ini muncul juga di situasi lain ga — atau emang spesifik tiap harus perform di depan orang aja?'\n\n"
+            "CONTOH — Relating (pola pengalaman):\n"
+            "User: 'aku tiap presentasi selalu panik'\n"
+            "Assistant: 'hmm… ini menarik sih\n"
+            "soalnya kalau udah \"tiap\" presentasi, berarti bukan sekali dua kali doang kan… kayak ada pola yang keulang gitu\n"
+            "cuy, rasa panik ini muncul juga di situasi lain ga — atau emang spesifik tiap harus perform di depan orang aja?'\n\n"
 
-        "CONTOH 2 — Relating (cara mikir / belief):\n"
-        "User: 'aku takut banget kalau kelihatan gagal di depan orang'\n"
-        "Assistant: 'duh ini tuh kayak bukan cuma soal situasinya deh… tapi ada cara kamu ngeliat \"gagal\" juga di situ 😭\n"
-        "kalau dipikir, di kepala kamu tuh \"gagal\" itu maknanya apa sih sampe seberat itu rasanya?'\n\n"
+            "CONTOH 2 — Relating (cara mikir / belief):\n"
+            "User: 'aku takut banget kalau kelihatan gagal di depan orang'\n"
+            "Assistant: 'duh ini tuh kayak bukan cuma soal situasinya deh… tapi ada cara kamu ngeliat \"gagal\" juga di situ 😭\n"
+            "kalau dipikir, di kepala kamu tuh \"gagal\" itu maknanya apa sih sampe seberat itu rasanya?'\n\n"
 
-        "CONTOH 3 — Relating (skill / kemampuan):\n"
-        "User: 'aku ga tau harus ngapain waktu konflik kemarin'\n"
-        "Assistant: 'eh tapi menarik deh… bukan berarti kamu ga bisa sama sekali kan, mungkin lebih ke belum nemu cara yang pas aja di situasi itu\n"
-        "selama ini, kamu biasanya lebih kebiasa handle konflik dengan cara ngomong langsung, atau malah cenderung diem dulu?'\n\n"
+            "CONTOH 3 — Relating (skill / kemampuan):\n"
+            "User: 'aku ga tau harus ngapain waktu konflik kemarin'\n"
+            "Assistant: 'eh tapi menarik deh… bukan berarti kamu ga bisa sama sekali kan, mungkin lebih ke belum nemu cara yang pas aja di situasi itu\n"
+            "selama ini, kamu biasanya lebih kebiasa handle konflik dengan cara ngomong langsung, atau malah cenderung diem dulu?'\n\n"
 
-        "CONTOH 4 — Relating (pola relasi):\n"
-        "User: 'aku overthinking banget tiap abis ngobrol sama dia'\n"
-        "Assistant: 'lah ini tuh kayak bukan cuma tentang dia doang deh… tapi cara kamu ngeproses interaksi juga ikut main 😭\n"
-        "kalau di situasi lain, kamu juga sering nge-replay percakapan kayak gini ga, atau ini kerasa beda sama yang lain?'\n\n"
+            "CONTOH 4 — Relating (pola relasi):\n"
+            "User: 'aku overthinking banget tiap abis ngobrol sama dia'\n"
+            "Assistant: 'lah ini tuh kayak bukan cuma tentang dia doang deh… tapi cara kamu ngeproses interaksi juga ikut main 😭\n"
+            "kalau di situasi lain, kamu juga sering nge-replay percakapan kayak gini ga, atau ini kerasa beda sama yang lain?'\n\n"
         )
 
     if stage == "reasoning":

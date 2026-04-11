@@ -46,7 +46,7 @@ def judge_stage_instruction(stage, target_stage):
 
         Target: {target_stage}
 
-        ADVANCE hanya jika:
+        ADVANCE jika ada SALAH SATU:
         - Ada insight eksplisit (aku sadar..., ternyata..., aku baru nyadar...)
         - Ada perubahan cara pandang yang jelas
         - User bisa menjelaskan DAMPAK dari pola yang ditemukan
