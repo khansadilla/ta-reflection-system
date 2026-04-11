@@ -50,7 +50,7 @@ def llm_gate(stage, stage_buffer):
     return result
 
 # 2. Update fsm_step buat nerima last_question
-def fsm_step(stage, full_history, llm, stage_buffer, last_question, last_user_input):
+def fsm_step(stage, full_history, llm, stage_buffer):
 
     # Oper last_question ke llm_gate
     decision = llm_gate(stage, stage_buffer)

@@ -70,9 +70,7 @@ if not st.session_state.is_completed:
                 st.session_state.stage, 
                 st.session_state.full_history, 
                 llm, 
-                st.session_state.stage_buffer,
-                st.session_state.last_question,
-                st.session_state.last_user_input
+                st.session_state.stage_buffer
             )
         
         if new_stage == "completed":

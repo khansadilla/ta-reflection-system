@@ -11,11 +11,14 @@ def judge_stage_instruction(stage, target_stage):
 
         Target: {target_stage}
 
-        ADVANCE hanya jika user menunjukkan SEMUA ini:
+        ADVANCE hanya jika ada MINIMAL DUA dari ini:
         - Sudah menceritakan apa yang terjadi (konteks jelas)
         - Sudah mengekspresikan perasaan/reaksi personal
-        - Ada minimal satu sinyal refleksi diri:
-          (aku merasa..., aku kayaknya..., aku sering...)
+        - Ada sinyal refleksi diri, misalnya:
+        * Menyadari pola diri sendiri
+        * Membandingkan diri sekarang vs dulu
+        * Menyebut kecenderungan/kebiasaan diri
+        * Menyadari ada gap antara harapan dan kenyataan
 
         STAY jika:
         - Konteks kejadian masih samar
