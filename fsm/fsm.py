@@ -5,7 +5,7 @@ from utils.utils import sanitize
 from llm.model import llm_judge
 import json
 # 1. Update llm_gate buat nerima last_question
-def llm_gate(stage, stage_buffer):
+'''def llm_gate(stage, stage_buffer):
     judge_chain = get_judge_chain(stage, llm_judge)
     
     response = judge_chain.invoke({
@@ -23,6 +23,30 @@ def llm_gate(stage, stage_buffer):
             "missing": ["tidak bisa parsing response judge"]
         }
     
+    return result'''
+
+def llm_gate(stage, stage_buffer):
+    judge_chain = get_judge_chain(stage, llm_judge)
+    
+    response = judge_chain.invoke({"text": stage_buffer})
+    
+    print("=== JUDGE RAW OUTPUT ===")
+    print(response.content)
+    print("========================")
+    
+    try:
+        raw = response.content.strip()
+        raw = raw.replace("```json", "").replace("```", "").strip()
+        result = json.loads(raw)
+    except Exception as e:
+        print(f"=== PARSING ERROR: {e} ===")
+        result = {
+            "verdict": "stay",
+            "fulfilled": [],
+            "missing": []
+        }
+    
+    print(f"=== VERDICT: {result} ===")
     return result
 
 # 2. Update fsm_step buat nerima last_question
