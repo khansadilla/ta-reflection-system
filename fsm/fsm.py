@@ -3,37 +3,46 @@ from prompts.chains import get_chain
 from prompts.judge_chain import get_judge_chain
 from utils.utils import sanitize
 from llm.model import llm_judge
-from utils.utils import get_recent_history
-
+import json
 # 1. Update llm_gate buat nerima last_question
-def llm_gate(stage, full_history):
-    recent_history=get_recent_history(full_history)
-    
+def llm_gate(stage, stage_buffer):
     judge_chain = get_judge_chain(stage, llm_judge)
     
-    # Kirim dua-duanya ke judge_chain
     response = judge_chain.invoke({
-        "text": recent_history
+        "text": stage_buffer
     })
     
-    decision = response.content.strip().replace(".", "").replace(" ", "").lower()
-    return decision
+    try:
+        raw = response.content.strip()
+        raw = raw.replace("```json", "").replace("```", "").strip()
+        result = json.loads(raw)
+    except:
+        result = {
+            "verdict": "stay",
+            "fulfilled": [],
+            "missing": ["tidak bisa parsing response judge"]
+        }
+    
+    return result
 
 # 2. Update fsm_step buat nerima last_question
 def fsm_step(stage, full_history, llm, stage_buffer, last_question, last_user_input):
 
     # Oper last_question ke llm_gate
-    decision = llm_gate(stage, full_history)
+    decision = llm_gate(stage, stage_buffer)
+    verdict = decision.get("verdict", "stay").lower()
+    missing = decision.get("missing",[])
     
     new_stage = NEXT[stage] if decision == "advance" else stage
     if new_stage=="completed":
         return new_stage, None, stage_buffer, decision
 
-    if decision == "advance":
+    if verdict == "advance":
         stage_buffer = ""
+        missing = []
 
     # Generate pertanyaan baru berdasarkan stage (yang mungkin sudah update)
-    chain = get_chain(new_stage, llm, full_history, stage_buffer)
+    chain = get_chain(new_stage, llm, full_history, stage_buffer, missing)
     
     new_question = sanitize(chain.invoke({
         "stage_buffer": stage_buffer,

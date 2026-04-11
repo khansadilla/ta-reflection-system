@@ -103,8 +103,12 @@ def get_judge_chain(stage, llm_judge):
             - Sinyal implisit boleh ditangkap, tapi harus jelas
             - Jika ragu → pilih STAY
 
-            OUTPUT:
-            Hanya tulis ADVANCE atau STAY, tanpa penjelasan.
+            OUTPUT (wajib JSON, tanpa tambahan apapun):
+            {{
+                "verdict": "ADVANCE" atau "STAY",
+                "fulfilled": ["kriteria yang sudah terpenuhi"],
+                "missing": ["kriteria yang belum terpenuhi"]
+            }}
             """
         ),
         (
