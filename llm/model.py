@@ -3,7 +3,8 @@ from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",  # murah tapi bagus
-    temperature=0.7
+    temperature=0.7,
+    frequency_penalty=0.6
 )
 '''llm = ChatGroq(
     model="llama-3.1-8b-instant",

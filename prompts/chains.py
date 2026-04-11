@@ -1,6 +1,5 @@
 from langchain_core.prompts import ChatPromptTemplate
 from prompts.instructions import core_instruction, stage_instruction
-from rag.retriever import retrieve
 from utils.utils import get_recent_history
 def get_chain(stage, llm, full_history, stage_buffer):
     
