@@ -104,11 +104,9 @@ def get_judge_chain(stage, llm_judge):
             - Jika ragu → pilih STAY
 
             OUTPUT (wajib JSON, tanpa tambahan apapun):
-            {{
-                "verdict": "ADVANCE" atau "STAY",
-                "fulfilled": ["kriteria yang sudah terpenuhi"],
-                "missing": ["kriteria yang belum terpenuhi"]
-            }}
+            "- verdict: ADVANCE atau STAY\n"
+            "- fulfilled: list\n"
+            "- missing: list\n"
             """
         ),
         (
