@@ -495,51 +495,44 @@ def judge_stage_instruction(stage, target_stage):
 
 
 def get_judge_chain(stage, llm_judge):
+    from langchain_core.messages import SystemMessage, HumanMessage
+    from langchain_core.prompts import HumanMessagePromptTemplate, ChatPromptTemplate
 
     target_stage = NEXT.get(stage, "completed")
     stage_instr = judge_stage_instruction(stage, target_stage)
 
-    stage_instr = stage_instr.replace("{", "{{").replace("}", "}}")
+    # Build system message sebagai plain string dulu
+    system_content = f"""
+Kamu adalah evaluator refleksi berbasis framework 5R yang ketat.
+
+Tahap saat ini: {stage}
+Tahap target: {target_stage}
+
+Tugas:
+Tentukan apakah user BENAR-BENAR sudah memenuhi indikator tahap saat ini
+sebelum boleh maju ke tahap berikutnya.
+
+{stage_instr}
+
+ATURAN PENTING:
+- Jangan mudah ADVANCE — refleksi yang dangkal merugikan user
+- Jawaban singkat (1-5 kata) hampir selalu STAY
+- Sinyal implisit boleh ditangkap, tapi harus jelas
+- Jika ragu → pilih STAY
+
+Output wajib JSON murni tanpa tambahan apapun:
+{{"verdict": "ADVANCE atau STAY", "fulfilled": [], "missing": []}}
+"""
 
     prompt = ChatPromptTemplate.from_messages([
-        (
-            "system",
-            f"""
-            Kamu adalah evaluator refleksi berbasis framework 5R yang ketat.
+        SystemMessage(content=system_content),
+        HumanMessagePromptTemplate.from_template("""
+Percakapan terakhir:
 
-            Tahap saat ini: {stage}
-            Tahap target: {target_stage}
+{text}
 
-            Tugas:
-            Tentukan apakah user BENAR-BENAR sudah memenuhi indikator tahap saat ini
-            sebelum boleh maju ke tahap berikutnya.
-
-            {stage_instr}
-
-            ATURAN PENTING:
-            - Jangan mudah ADVANCE — refleksi yang dangkal merugikan user
-            - Jawaban singkat (1-5 kata) hampir selalu STAY
-            - Sinyal implisit boleh ditangkap, tapi harus jelas
-            - Jika ragu → pilih STAY
-
-            OUTPUT wajib JSON murni tanpa tambahan apapun:
-            {{
-                "verdict": "ADVANCE atau STAY",
-                "fulfilled": ["elemen yang sudah terpenuhi"],
-                "missing": ["elemen yang belum terpenuhi"]
-            }}
-            """
-        ),
-        (
-            "human",
-            """
-            Percakapan terakhir:
-
-            {text}
-
-            Keputusan:
-            """
-        )
+Keputusan:
+""")
     ])
 
     return prompt | llm_judge
