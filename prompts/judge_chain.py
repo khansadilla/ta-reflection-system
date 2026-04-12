@@ -520,12 +520,12 @@ def get_judge_chain(stage, llm_judge):
             - Sinyal implisit boleh ditangkap, tapi harus jelas
             - Jika ragu → pilih STAY
 
-            "OUTPUT (wajib JSON, tanpa tambahan apapun):\n"
-            "{{\n"
-            '  "verdict": "ADVANCE" atau "STAY",\n'
-            '  "fulfilled": [],\n'
-            '  "missing": []\n'
-            "}}"
+            OUTPUT wajib JSON murni tanpa tambahan apapun:
+            {{
+                "verdict": "ADVANCE atau STAY",
+                "fulfilled": ["elemen yang sudah terpenuhi"],
+                "missing": ["elemen yang belum terpenuhi"]
+            }}
             """
         ),
         (
