@@ -100,6 +100,7 @@ if not st.session_state.is_completed:
         stage_changed = (curr_stage != prev_stage) and (prev_stage is not None)
 
         st.session_state.stage = curr_stage
+        
         progress_placeholder.progress(progress_map.get(curr_stage, 0))
 
         # --- NOTIFIKASI TOAST ---
