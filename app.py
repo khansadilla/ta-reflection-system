@@ -49,6 +49,9 @@ if "last_question" not in st.session_state:
 if "previous_stage" not in st.session_state:
     st.session_state.previous_stage = None
 
+if "summary" not in st.session_state:
+    st.session_state.summary = None
+
 # 3. Tampilin Chat History
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -81,9 +84,8 @@ if not st.session_state.is_completed:
             summary_chain = get_summary_chain(llm, st.session_state.full_history)
             summary = summary_chain.invoke({}).content
             st.subheader("🪞 Ringkasan Refleksi Kamu")
-            st.write(summary)
-            st.balloons()
-            st.stop()
+            st.session_state.summary = summary
+            st.rerun()
 
         # --- HANDLE STAGE CHANGE ---
         prev_stage = st.session_state.previous_stage
@@ -115,3 +117,10 @@ if not st.session_state.is_completed:
             st.session_state.messages.append({"role": "assistant", "content": next_question})
             with st.chat_message("assistant"):
                 st.markdown(next_question)
+                
+# --- RENDER SUMMARY ---
+if st.session_state.is_completed and st.session_state.summary:
+    st.subheader("🪞 Ringkasan Refleksi Kamu")
+    st.write(st.session_state.summary)
+    st.balloons()
+    st.stop()
