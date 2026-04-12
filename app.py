@@ -67,11 +67,12 @@ if not st.session_state.is_completed:
 
         with st.spinner("Lagi dengerin..."):
             new_stage, next_question, new_buffer, decision = fsm_step(
-                st.session_state.stage, 
-                st.session_state.full_history, 
-                llm, 
-                st.session_state.stage_buffer
-            )
+            st.session_state.stage,
+            st.session_state.full_history,
+            llm,
+            st.session_state.stage_buffer,
+            st.session_state.last_user_input
+        )
         
         if new_stage == "completed":
             st.session_state.is_completed = True  # ← set di sini

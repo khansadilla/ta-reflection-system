@@ -1,11 +1,50 @@
 from langchain_core.prompts import ChatPromptTemplate
 from prompts.instructions import core_instruction, stage_instruction
 from utils.utils import get_recent_history
-def get_chain(stage, llm, full_history, stage_buffer, missing):
-    
+
+PRIORITY_MAP = {
+    "reporting_responding": ["Situasi", "Emosi", "Respon", "Makna Personal"],
+    "relating": ["Faktor internal", "Pola"],
+    "reasoning": ["Insight", "Perubahan cara pandang", "Dampak"],
+    "reconstructing": ["Tindakan spesifik", "Konteks", "Alasan"]
+}
+
+MISSING_GUIDE = {
+    "Situasi": "arahkan ke memperjelas apa yang terjadi",
+    "Emosi": "arahkan ke apa yang dirasakan",
+    "Respon": "arahkan ke apa yang dilakukan atau dipikirkan",
+    "Makna Personal": "arahkan ke kenapa ini penting bagi diri",
+
+    "Pola": "cek apakah ini sering terjadi",
+    "Faktor internal": "arahkan ke penyebab dari dalam diri",
+
+    "Insight": "dorong ke pemahaman baru yang lebih jelas",
+    "Perubahan cara pandang": "arahkan ke pergeseran perspektif",
+    "Dampak": "gali pengaruhnya ke diri",
+
+    "Tindakan spesifik": "minta aksi yang konkret",
+    "Konteks": "minta kapan atau bagaimana dilakukan",
+    "Alasan": "tanya kenapa ini akan membantu"
+}
+
+def sort_missing(stage, missing):
+    priority = PRIORITY_MAP.get(stage, [])
+    return sorted(
+        missing,
+        key=lambda x: priority.index(x) if x in priority else 999
+    )
+
+def get_chain(stage, llm, full_history, stage_buffer, missing=None, last_user_input=""):
+    sorted_missing = sort_missing(stage, missing) if missing else []
+    primary_missing = sorted_missing[0] if sorted_missing else None
+    focus_text = primary_missing if primary_missing else "tidak ada"
+    guide_text = MISSING_GUIDE.get(primary_missing, "")
+
     recent_history = get_recent_history(full_history)
 
-    missing_text = "\n".join(f"- {m}" for m in missing) if missing else "tidak ada"
+    if not primary_missing:
+        focus_text = "lanjutkan eksplorasi dari konteks"
+        guide_text = "perdalam bagian yang paling menarik dari pembicaraan"
 
     prompt = ChatPromptTemplate.from_messages([
         (
@@ -18,29 +57,29 @@ def get_chain(stage, llm, full_history, stage_buffer, missing):
             """
         ),
         (
-           "human",    f"""
+            "human", f"""
 
-            ATURAN MEMBACA KONTEKS:
-            - Gunakan RIWAYAT hanya untuk memahami alur percakapan
-            - Gunakan FOKUS REFLEKSI untuk memahami makna yang lebih dalam
-
-            YANG BELUM DIGALI (fokus ke salah satu ini!):
-            {missing_text}
-
-            FOKUS REFLEKSI SAAT INI:
-            {stage_buffer}
-
-            INPUT TERBARU:
-            {stage_buffer.split(chr(10))[-1]}
 
             RIWAYAT PERCAKAPAN:
             {recent_history}
 
-            ATURAN PERCAKAPAN:
-            - Jangan memulai ulang percakapan
+            FOKUS REFLEKSI (akumulasi di stage ini):
+            {stage_buffer}
+
+            INPUT TERBARU:
+            {last_user_input}
+
+            FOKUS UTAMA:
+            {focus_text}
+
+            ARAH PERTANYAAN:
+            {guide_text}
+
+            ATURAN:
             - Langsung lanjut dari konteks yang ada
-            - Fokus pertanyaan ke YANG BELUM DIGALI di atasan
-            - Jika informasi kurang → bertanya, bukan menyimpulkan
+            - Fokus utama ke FOKUS UTAMA
+            - Gunakan arah pertanyaan sebagai panduan, bukan diulang mentah
+            - Jangan menanyakan lebih dari satu hal
             """
         )
     ])
