@@ -26,9 +26,15 @@ st.caption("Framework 5R (Bain et al., 2002) - TA Khansa Adilla")
 
 # 2. Inisialisasi Session State
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": """Eh, lagi ada yang kepikiran ngga belakangan ini?
-Mungkin kayak tugas yang ditunda mulu, atau abis rapat terus kepikiran, atau malah soal diri sendiri—lagi ngerasa capek, overthinking, atau ngerasa ga cukup. Nah, apa nih
-yang lagi sering kamu pikirkan?"""}]
+    st.session_state.messages = [{"role": "assistant", "content": """akhir-akhir ini ada yang kepikiran ga dari hal-hal yang lagi kamu jalanin?
+
+Entah itu kuliah, organisasi, atau hal lain yang lagi kamu pegang…
+
+Yang harusnya sih bisa jalan,
+tapi malah ketahan,
+atau udah lewat tapi masih kepikiran.
+
+Yuk refleksi!"""}]
     
 if "stage" not in st.session_state:
     st.session_state.stage = "reporting_responding"
