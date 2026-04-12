@@ -499,6 +499,8 @@ def get_judge_chain(stage, llm_judge):
     target_stage = NEXT.get(stage, "completed")
     stage_instr = judge_stage_instruction(stage, target_stage)
 
+    stage_instr = stage_instr.replace("{", "{{").replace("}", "}}")
+
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
