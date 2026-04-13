@@ -5,3 +5,4 @@ def sanitize(text):
 def get_recent_history(full_history, n=4):
     lines = full_history.strip().split("\n")
     return "\n".join(lines[-n:])
+

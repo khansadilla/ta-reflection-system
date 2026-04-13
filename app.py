@@ -2,6 +2,7 @@ import streamlit as st
 from fsm.fsm import fsm_step
 from llm.model import llm
 from prompts.summary import get_summary_chain
+from utils.logger import save_log
 
 # --- SETTING PAGE ---
 st.set_page_config(page_title="Refleksi Bareng Dilla-Bot", page_icon="💬")
@@ -20,6 +21,7 @@ with st.sidebar:
     progress_map = {"reporting_responding": 20, "relating": 40, "reasoning": 60, "reconstructing": 80, "completed": 100}
     progress_placeholder = st.empty()
     progress_placeholder.progress(progress_map.get(current_s, 0))
+    
 
 st.title("🪞 Refleksi Diri")
 st.caption("Framework 5R (Bain et al., 2002) - TA Khansa Adilla")
@@ -58,6 +60,13 @@ if "previous_stage" not in st.session_state:
 if "summary" not in st.session_state:
     st.session_state.summary = None
 
+if "logs" not in st.session_state:
+    st.session_state.logs = []
+
+if "session_id" not in st.session_state:
+    from datetime import datetime
+    st.session_state.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+
 # 3. Tampilin Chat History
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -75,7 +84,7 @@ if not st.session_state.is_completed:
         st.session_state.full_history += "\nUSER: " + user_input.strip()
 
         with st.spinner("Lagi dengerin..."):
-            new_stage, next_question, new_buffer, decision = fsm_step(
+            new_stage, next_question, new_buffer, decision, log_entry = fsm_step(
             st.session_state.stage,
             st.session_state.full_history,
             llm,
@@ -83,13 +92,17 @@ if not st.session_state.is_completed:
             st.session_state.last_user_input
         )
         
+        st.session_state.logs.append(log_entry)
+        
         if new_stage == "completed":
             st.session_state.is_completed = True  # ← set di sini
             st.session_state.stage = new_stage
+
+            save_log(st.session_state.logs, st.session_state.session_id)
+
             # langsung handle summary
             summary_chain = get_summary_chain(llm, st.session_state.full_history)
             summary = summary_chain.invoke({}).content
-            st.subheader("🪞 Ringkasan Refleksi Kamu")
             st.session_state.summary = summary
             st.rerun()
 

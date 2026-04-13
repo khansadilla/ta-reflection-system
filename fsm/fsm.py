@@ -32,6 +32,20 @@ def fsm_step(stage, full_history, llm, stage_buffer, last_user_input=""):
     verdict = decision.get("verdict", "stay").lower()
     missing = decision.get("missing", [])
     
+    forced = loop_count >= MAX_LOOP and verdict == "stay"
+
+    # --- LOGGING ---
+    log_entry = {
+        "stage": stage,
+        "user_input": last_user_input,
+        "verdict": verdict,
+        "fulfilled": decision.get("fulfilled", []),
+        "missing": missing,
+        "forced_advance": forced,
+        "turn_in_stage": loop_count
+    }
+
+
     if verdict == "advance":
         new_stage = NEXT[stage]
     elif loop_count >= MAX_LOOP and verdict=="stay":
@@ -49,4 +63,4 @@ def fsm_step(stage, full_history, llm, stage_buffer, last_user_input=""):
     chain = get_chain(new_stage, llm, full_history, stage_buffer, missing, last_user_input)
     new_question = sanitize(chain.invoke({}).content)
 
-    return new_stage, new_question, stage_buffer, decision
+    return new_stage, new_question, stage_buffer, decision, log_entry
