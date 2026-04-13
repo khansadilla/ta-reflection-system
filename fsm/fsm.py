@@ -27,7 +27,7 @@ def llm_gate(stage, stage_buffer):
 # 2. Update fsm_step buat nerima last_question
 def fsm_step(stage, full_history, llm, stage_buffer, last_user_input=""):
     loop_count = len(stage_buffer.strip().split("\n")) if stage_buffer else 0
-    MAX_LOOP = 5
+    MAX_LOOP = 3
     decision = llm_gate(stage, stage_buffer)
     verdict = decision.get("verdict", "stay").lower()
     missing = decision.get("missing", [])
