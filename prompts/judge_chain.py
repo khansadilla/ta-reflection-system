@@ -15,7 +15,6 @@ def judge_stage_instruction(stage, target_stage):
         1. Situasi: apa yang terjadi / topik yang dibahas
         2. Emosi: apa yang dirasakan
         3. Respon: apa yang dilakukan atau dipikirkan
-        4. Makna personal: kenapa ini penting / bermakna bagi diri
 
         CARA MENILAI (WAJIB IKUTI URUTAN INI):
         1. Dari konteks + jawaban, identifikasi elemen yang SUDAH ada → fulfilled
@@ -27,23 +26,15 @@ def judge_stage_instruction(stage, target_stage):
         - Situasi: ada konteks kejadian atau topik yang jelas
         - Emosi: ada indikasi perasaan, baik eksplisit maupun implisit
         - Respon: ada indikasi bagaimana user merespon situasi (tindakan atau pola pikir)
-        - Makna Personal: ada penjelasan kenapa situasi ini penting atau berdampak bagi diri
 
         ELEMEN MISSING KETIKA:
         - Situasi: tidak ada konteks kejadian atau topik yang jelas
         - Emosi: tidak ada indikasi perasaan
         - Respon: tidak ada penjelasan respon atau reaksi user
-        - Makna Personal: belum ada penjelasan makna atau dampak bagi diri
-
         
         ADVANCE HANYA JIKA:
         - Situasi: Ada
-        - Makna Personal: Ada
         - dan minimal salah satu dari Emosi atau Respon: Ada
-
-        STAY jika:
-        - Makna Personal belum ada
-        - atau Situasi belum jelas
 
         CATATAN:
         - Evaluasi berdasarkan MAKNA, bukan kata literal
@@ -64,14 +55,13 @@ def judge_stage_instruction(stage, target_stage):
         - Situasi: Ada → pengguna menyebut kondisi "sering overthinking"
         - Emosi: Ada → overthinking mengindikasikan kondisi mental/emosional
         - Respon: Tidak ada → belum ada tindakan atau cara menghadapi overthinking
-        - Makna Personal: Tidak ada → belum dijelaskan dampak atau alasan pentingnya bagi pengguna
 
         Fulfilled:
         - Situasi
         - Emosi
 
         Missing:
-        - Makna Personal
+        - Respon
 
         Keputusan:
         STAY
@@ -91,13 +81,11 @@ def judge_stage_instruction(stage, target_stage):
         - Situasi: Ada → pengguna menjelaskan kondisi "akhir-akhir ini" dan adanya tugas yang tertunda
         - Emosi: Ada → "malas", "rasanya berat"
         - Respon: Ada → pengguna menghindar dengan scrolling dan mencari distraksi
-        - Makna Personal: Ada → pengguna menyadari bahwa tugas tersebut penting namun tetap tidak dilakukan, menunjukkan konflik internal
 
         Fulfilled:
         - Situasi
         - Emosi
         - Respon
-        - Makna Personal
 
         Missing:
         - Tidak ada
@@ -120,15 +108,13 @@ def judge_stage_instruction(stage, target_stage):
         - Situasi: Ada → tugas banyak, banyak hal yang harus diurus
         - Emosi: Ada → capek
         - Respon: Tidak ada → belum ada tindakan atau cara menghadapi kondisi tersebut
-        - Makna Personal: Tidak ada → belum ada refleksi kenapa ini penting atau dampaknya secara personal
-
+        
         Fulfilled:
         - Situasi
         - Emosi
 
         Missing:
         - Respon
-        - Makna Personal
 
         Keputusan:
         STAY

@@ -3,7 +3,7 @@ from prompts.instructions import core_instruction, stage_instruction
 from utils.utils import get_recent_history
 
 PRIORITY_MAP = {
-    "reporting_responding": ["Situasi", "Emosi", "Respon", "Makna Personal"],
+    "reporting_responding": ["Situasi", "Emosi", "Respon"],
     "relating": ["Faktor internal", "Pola"],
     "reasoning": ["Insight", "Perubahan cara pandang", "Dampak"],
     "reconstructing": ["Tindakan spesifik", "Konteks", "Alasan"]
@@ -13,7 +13,6 @@ MISSING_GUIDE = {
     "Situasi": "arahkan ke memperjelas apa yang terjadi",
     "Emosi": "arahkan ke apa yang dirasakan",
     "Respon": "arahkan ke apa yang dilakukan atau dipikirkan",
-    "Makna Personal": "arahkan ke kenapa ini penting bagi diri",
 
     "Pola": "cek apakah ini sering terjadi",
     "Faktor internal": "arahkan ke penyebab dari dalam diri",
