@@ -252,20 +252,21 @@ def judge_stage_instruction(stage, target_stage):
         4. Satu kalimat bisa memenuhi lebih dari satu elemen
 
         ELEMEN FULFILLED KETIKA:
-        - Insight : Insight jelas (bukan dugaan, tidak menggunakan "mungkin", "kayaknya")
-        - Perubahan cara pandang : Ada pergeseran cara pandang yang spesifik
-        - Dampak : User mampu menjelaskan dampak dari pola terhadap dirinya
+        - Insight: ada pemahaman baru tentang diri sendiri, termasuk implisit (misal: "aku yang salah karena mikir buruk tentang diri sendiri",
+        "ternyata bukan situasinya tapi cara aku maknainnya")
+        - Perubahan cara pandang: ada pergeseran perspektif, termasuk implisit — tidak harus pakai kata "ternyata" atau "aku sadar"
+        - Dampak: ada indikasi pengaruh pola ke diri sendiri,termasuk implisit (misal: "aku jadi kecewa", "aku ngerasa ga aman")
 
         ELEMEN MISSING KETIKA:
         - Insight : Insight masih umum atau generik (tidak spesifik ke diri sendiri)
         - Perubahan cara pandang : Masih memiliki cara pandang yang sama 
-        - Dampak : Belum ada penjelasan dampak
+        - Dampak : Belum ada penjelasan dampak 
 
         ADVANCE hanya jika:
-        -Ketiga elemen fulfilled
+        -Minimal dua dari tiga elemen fulfilled
 
         STAY jika:
-        -Salah satu elemen missing
+        -Kurang dari dua elemen fulfilled
         ----------------------
 
         CONTOH 1:

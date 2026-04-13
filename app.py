@@ -63,6 +63,9 @@ if "summary" not in st.session_state:
 if "logs" not in st.session_state:
     st.session_state.logs = []
 
+if "log_saved" not in st.session_state:
+    st.session_state.log_saved = False
+
 if "session_id" not in st.session_state:
     from datetime import datetime
     st.session_state.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -97,10 +100,6 @@ if not st.session_state.is_completed:
         if new_stage == "completed":
             st.session_state.is_completed = True  # ← set di sini
             st.session_state.stage = new_stage
-
-            save_log(st.session_state.logs, st.session_state.session_id)
-
-            # langsung handle summary
             summary_chain = get_summary_chain(llm, st.session_state.full_history)
             summary = summary_chain.invoke({}).content
             st.session_state.summary = summary
@@ -143,4 +142,10 @@ if st.session_state.is_completed and st.session_state.summary:
     st.subheader("🪞 Ringkasan Refleksi Kamu")
     st.write(st.session_state.summary)
     st.balloons()
+    
+    # Save log SETELAH summary kerender
+    if not st.session_state.get("log_saved", False):
+        save_log(st.session_state.logs, st.session_state.session_id)
+        st.session_state.log_saved = True
+    
     st.stop()
