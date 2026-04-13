@@ -54,7 +54,7 @@ def fsm_step(stage, full_history, llm, stage_buffer, last_user_input=""):
         new_stage = stage
     
     if new_stage == "completed":
-        return new_stage, None, stage_buffer, decision
+        return new_stage, None, stage_buffer, decision, log_entry
 
     if verdict == "advance":
         stage_buffer = ""
