@@ -7,6 +7,10 @@ from utils.logger import save_log
 # --- SETTING PAGE ---
 st.set_page_config(page_title="Refleksi Bareng Dilla-Bot", page_icon="💬")
 
+st.info(f"🔑 Kode Partisipan kamu: **{st.session_state.participant_id}**")
+st.code(st.session_state.participant_id)
+st.caption("Simpan kode ini dan gunakan saat mengisi kuesioner setelah sesi refleksi.")
+
 # --- 1. SIDEBAR (Developer Mode & Reset) ---
 with st.sidebar:
     st.title("🛠️ Developer Tools")
@@ -66,9 +70,9 @@ if "logs" not in st.session_state:
 if "log_saved" not in st.session_state:
     st.session_state.log_saved = False
 
-if "session_id" not in st.session_state:
+if "participant_id" not in st.session_state:
     from datetime import datetime
-    st.session_state.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+    st.session_state.participant_id = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # 3. Tampilin Chat History
 for message in st.session_state.messages:
