@@ -12,7 +12,6 @@ if "participant_id" not in st.session_state:
     st.session_state.participant_id = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 st.info(f"🔑 Kode Partisipan kamu: **{st.session_state.participant_id}**")
-st.code(st.session_state.participant_id)
 st.caption("Simpan kode ini dan gunakan saat mengisi kuesioner setelah sesi refleksi.")
 
 # --- 1. SIDEBAR (Developer Mode & Reset) ---
