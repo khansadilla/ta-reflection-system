@@ -7,6 +7,10 @@ from utils.logger import save_log
 # --- SETTING PAGE ---
 st.set_page_config(page_title="Refleksi Bareng Dilla-Bot", page_icon="💬")
 
+if "participant_id" not in st.session_state:
+    from datetime import datetime
+    st.session_state.participant_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+
 st.info(f"🔑 Kode Partisipan kamu: **{st.session_state.participant_id}**")
 st.code(st.session_state.participant_id)
 st.caption("Simpan kode ini dan gunakan saat mengisi kuesioner setelah sesi refleksi.")
@@ -70,9 +74,6 @@ if "logs" not in st.session_state:
 if "log_saved" not in st.session_state:
     st.session_state.log_saved = False
 
-if "participant_id" not in st.session_state:
-    from datetime import datetime
-    st.session_state.participant_id = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # 3. Tampilin Chat History
 for message in st.session_state.messages:
@@ -149,7 +150,7 @@ if st.session_state.is_completed and st.session_state.summary:
     
     # Save log SETELAH summary kerender
     if not st.session_state.get("log_saved", False):
-        save_log(st.session_state.logs, st.session_state.session_id)
+        save_log(st.session_state.logs, st.session_state.participant_id)
         st.session_state.log_saved = True
     
     st.stop()
